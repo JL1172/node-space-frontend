@@ -1,0 +1,1 @@
+export const img_one: string = "../../public/Screenshot from 2024-01-12 14-26-20.png"
