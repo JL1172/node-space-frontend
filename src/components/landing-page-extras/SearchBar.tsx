@@ -8,7 +8,6 @@ import icon2 from "../../global-imgs/icon2.png";
 function SearchBar() {
   return (
     <StyledSearchBar>
-      <div id = "wrapper">
       <div id="searchContainer">
         <input
           placeholder="Search blogs..."
@@ -19,6 +18,7 @@ function SearchBar() {
         />
         <CiSearch id="searchIcon" />
       </div>
+      <div id = "buttonWrapper">
       <Button
         sx={{
           bgcolor: "white",

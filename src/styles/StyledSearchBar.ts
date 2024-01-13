@@ -7,15 +7,6 @@ export const StyledSearchBar = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-  #wrapper {
-    min-height: 20dvh;
-    width: 60dvw;
-    height: fit-content;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-  }
   #searchContainer {
     position: relative;
   }
@@ -28,7 +19,7 @@ export const StyledSearchBar = styled.div`
     top: 9px;
   }
   #search {
-    width: 25rem;
+    width: 30rem;
     background-color: rgb(51, 51, 51);
     border: none;
     color: rgb(172, 172, 172);
@@ -51,11 +42,22 @@ export const StyledSearchBar = styled.div`
   }
   #button {
     margin-left: 0.7rem;
+    margin: 1rem;
   }
   img {
-    position: absolute;
-    height: 10rem;
+    height: 15dvh;
     right: 1rem;
-    
   }
+@media screen and (max-width: 860px) {
+  img {
+    display: none;
+  }
+  #search {
+    width: 70dvw;
+
+  }
+  #button {
+    width: 20dvw;
+  }
+}
 `;
