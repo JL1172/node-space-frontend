@@ -1,13 +1,16 @@
 import { connect } from "react-redux";
 import { RootState } from "../../redux/reducers/root-reducers";
 import { StyledContentLanding } from "../../styles/StyledContentLanding";
-import { img_one } from "../../global-imgs/img_url";
+import iconImage from "../../global-imgs/icon.png";
 
 function Content() {
   return (
     <StyledContentLanding>
-      {/* <img src = {""} alt = "image"/> */}
-      <h1>Discover The Power Of Nodejs</h1>
+      <img src={iconImage} alt="Icon" />
+      <div className="node-wrapper">
+        <h1>Discover The Power Of</h1>
+        <h1>Node.js</h1>
+      </div>
     </StyledContentLanding>
   );
 }

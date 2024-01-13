@@ -1,4 +1,4 @@
-import React, { ReactPropTypes, useEffect } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { RootState } from "./redux/reducers/root-reducers";
 import { fetch_endpoint } from "./redux/actions-creators/sanity";
@@ -9,7 +9,7 @@ import LandingPage from "./components/LandingPage";
 function App(props: AppProps) {
   useEffect(() => {
     props.fetch_endpoint();
-  },[])
+  },[])//eslint-disable-line
   return (
     <StyledApp>
       <LandingPage />
