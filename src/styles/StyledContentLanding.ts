@@ -1,12 +1,16 @@
-import styled from "styled-components";
-
+import styled, { keyframes } from "styled-components";
+const spinAnimation = keyframes`
+100% {
+  transform: rotate(360deg);
+}
+`
 export const StyledContentLanding = styled.div`
   margin-top: 5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  .node-wrapper {
+  #node-wrapper {
     display: flex;
     height: 15rem;
     flex-direction: column;
@@ -19,8 +23,9 @@ export const StyledContentLanding = styled.div`
     }
   }
   img {
-    width: 13rem;
+    width: 12rem;
     height: 10rem;
+    animation: ${spinAnimation} 20s linear infinite;
   }
 
   @media screen and (max-width: 1600px) {
@@ -30,7 +35,7 @@ export const StyledContentLanding = styled.div`
     }
   }
   @media screen and (max-width: 1050px) {
-    .node-wrapper {
+    #node-wrapper {
       h1 {
         font-size: 3rem;
       }
@@ -41,7 +46,7 @@ export const StyledContentLanding = styled.div`
       width: 8rem;
       height: 7rem;
     }
-    .node-wrapper {
+    #node-wrapper {
       padding: 2.5dvw;
       h1 {
         font-size: 2.5rem;
@@ -53,7 +58,7 @@ export const StyledContentLanding = styled.div`
       width: 8rem;
       height: 7rem;
     }
-    .node-wrapper {
+    #node-wrapper {
       padding: 0;
       padding-left: 2dvw;
       padding-right: 2dvw;
@@ -67,7 +72,7 @@ export const StyledContentLanding = styled.div`
       width: 8rem;
       height: 7rem;
     }
-    .node-wrapper {
+    #node-wrapper {
       padding: 0;
       padding-left: 2dvw;
       padding-right: 2dvw;
@@ -81,7 +86,7 @@ export const StyledContentLanding = styled.div`
       width: 5rem;
       height: 5rem;
     }
-    .node-wrapper {
+    #node-wrapper {
       padding: 0;
       padding-left: 2dvw;
       padding-top: 2rem;

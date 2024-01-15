@@ -19,7 +19,7 @@ function SearchBar() {
         <CiSearch id="searchIcon" />
       </div>
       <div id = "buttonWrapper">
-      <Button
+      <Button 
         sx={{
           bgcolor: "white",
           color: "black",

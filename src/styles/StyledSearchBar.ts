@@ -48,6 +48,7 @@ export const StyledSearchBar = styled.div`
     height: 15dvh;
     right: 1rem;
   }
+
 @media screen and (max-width: 860px) {
   img {
     display: none;

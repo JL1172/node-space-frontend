@@ -7,7 +7,7 @@ function Content() {
   return (
     <StyledContentLanding>
       <img src={iconImage} alt="Icon" />
-      <div className="node-wrapper">
+      <div id="node-wrapper">
         <h1>Discover The Power Of</h1>
         <h1>Node.js</h1>
       </div>
