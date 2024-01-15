@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StyledSearchBar = styled.div`
-  min-height: 20dvh;
+  min-height: 30dvh;
   height: fit-content;
   display: flex;
   justify-content: center;
@@ -19,7 +19,7 @@ export const StyledSearchBar = styled.div`
     top: 9px;
   }
   #search {
-    width: 30rem;
+    width: 40rem;
     background-color: rgb(51, 51, 51);
     border: none;
     color: rgb(172, 172, 172);
@@ -48,6 +48,16 @@ export const StyledSearchBar = styled.div`
     height: 15dvh;
     right: 1rem;
   }
+
+@media screen and (max-width: 1066px) {
+  #search {
+    width: 30rem;
+
+  }
+  /* #button {
+    width: 20dvw;
+  } */
+}
 
 @media screen and (max-width: 860px) {
   img {
