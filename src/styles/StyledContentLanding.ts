@@ -1,16 +1,65 @@
 import styled, { keyframes } from "styled-components";
 const spinAnimation = keyframes`
-100% {
-  transform: rotate(360deg);
+25% {
+  transform: translateY(1rem) rotate(5deg);
 }
-`
+50% {
+  transform: translateY(-1rem) rotate(0deg);
+}
+75% {
+  transform: translateY(1.2rem) rotate(-5deg);
+}
+100% {
+  transform: translateY(1rem) rotate(5deg);
+}
+`;
+const writer = keyframes`
+100% {
+  opacity: 1;
+}
+`;
+const changeColor2 = keyframes`
+from {
+  color : white;
+} 
+to {
+  color: rgb(60, 135, 58);
+}
+`;
+
 export const StyledContentLanding = styled.div`
   margin-top: 5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
+  .writer {
+    opacity: 0;
+    color: white;
+    animation: ${writer} 0.4s ease-in-out forwards,
+      ${changeColor2} 5s linear infinite;
+    font-family: "Fira Code", monospace;
+  }
+  .one {
+    animation-delay: 150ms;
+  }
+  .two {
+    animation-delay: 200ms;
+  }
+  .three {
+    animation-delay: 250ms;
+  }
+  .four {
+    animation-delay: 300ms;
+  }
+  .five {
+    animation-delay: 350ms;
+  }
+  .six {
+    animation-delay: 400ms;
+  }
   #node-wrapper {
+    position: relative;
     display: flex;
     height: 15rem;
     flex-direction: column;
@@ -20,12 +69,14 @@ export const StyledContentLanding = styled.div`
     padding-top: 5rem;
     h1 {
       font-size: 3.8rem;
+      z-index: 10;
     }
   }
   img {
     width: 12rem;
     height: 10rem;
-    animation: ${spinAnimation} 20s linear infinite;
+    border-radius: 10rem;
+    animation: ${spinAnimation} 10s linear infinite alternate;
   }
 
   @media screen and (max-width: 1600px) {

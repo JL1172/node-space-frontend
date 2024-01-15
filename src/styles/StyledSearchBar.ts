@@ -54,7 +54,7 @@ export const StyledSearchBar = styled.div`
     display: none;
   }
   #search {
-    width: 70dvw;
+    width: 68dvw;
 
   }
   #button {
