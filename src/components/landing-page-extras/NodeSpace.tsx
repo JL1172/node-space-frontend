@@ -6,6 +6,7 @@ import icon4 from "../../global-imgs/icon4.png";
 import icon5 from "../../global-imgs/icon5.png";
 import { NodeSpaceDescriptionType } from "../../global-dto/g-dtos";
 import { Button } from "@mui/material";
+import { useEffect } from "react";
 
 const description_modules: NodeSpaceDescriptionType[] = [
   {
@@ -16,8 +17,8 @@ const description_modules: NodeSpaceDescriptionType[] = [
         Once a week, a module will be picked from Node's built in modules and a
         follow along tutorial (with code) will be posted. This tutorial will go
         into depth with the practical application and implementation of the
-        module and real world examples we have seen node utilized or have
-        utilized node.
+        module and real world examples we have seen node utilized in or ways we
+        have utilized node.
       </>
     ),
     p1: undefined,
@@ -30,13 +31,13 @@ const description_modules: NodeSpaceDescriptionType[] = [
     description: undefined,
     p1: (
       <>
-        Node-space addresses a prevalent issue in the developer community— the
-        overshadowing of Node.js by its own frameworks and libraries. Many
-        developers, like myself, initially gravitate towards frameworks like
-        Express, inadvertently neglecting the intrinsic power residing within
-        vanilla Node. The built-in modules, such as OS, FS, and ChildProcess,
-        often go unnoticed, contributing to Node being underrated and
-        overlooked.
+        <span className="spn">[Node-space]</span> addresses a prevalent issue in
+        the developer community— the overshadowing of Node.js by its own
+        frameworks and libraries. Many developers, like myself, initially
+        gravitate towards frameworks like Express, inadvertently neglecting the
+        intrinsic power residing within vanilla Node. The built-in modules,
+        often go unnoticed and overlooked, contributing to Node being underrated
+        and overlooked.
       </>
     ),
     p2: (
@@ -52,8 +53,9 @@ const description_modules: NodeSpaceDescriptionType[] = [
     ),
     p3: (
       <>
-        As I explored modules like Buffer and Child Process, my understanding of
-        Node deepened, making me a more proficient developer. Node-space aims to
+        As I explored modules like <span className="spn">[Crypto]</span> and{" "}
+        <span className="spn">[Child Process]</span>, my understanding of Node
+        deepened, making me a more proficient developer. Node-space aims to
         bridge the gap, unveiling the compelling features of Node's modules and
         instilling the excitement that comes with mastering this powerful
         runtime. Through sharing these insights, I hope to inspire a renewed
@@ -78,9 +80,24 @@ const description_modules: NodeSpaceDescriptionType[] = [
 ];
 
 function NodeSpace() {
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("injection-site-shown");
+        } else {
+          entry.target.classList.remove("injection-site-shown");
+        }
+      });
+    });
+    const injector = document.querySelectorAll(".injection-site-hidden");
+    injector.forEach((el) => observer.observe(el));
+  }, []);
   return (
     <StyledNodeLanding>
-      <div id="h1-div" >Discover Node Space</div>
+      <div id="h1-div" className="node-space-branding">
+        <span className="injection-site-hidden"></span>Explore Node-Space
+      </div>
       <div id="desc-wrapper">
         {description_modules.map((n, i) => {
           return (

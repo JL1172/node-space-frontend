@@ -12,3 +12,8 @@ code {
     monospace;
 
 }
+
+.node-space-branding {
+  font-family: 'Source Code Pro', monospace;
+  position: relative;
+}

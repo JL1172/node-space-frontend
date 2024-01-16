@@ -6,6 +6,7 @@ import { FaReact } from "react-icons/fa";
 import { SiNestjs } from "react-icons/si";
 import { BiLogoPostgresql } from "react-icons/bi";
 import { Button } from "@mui/material";
+import { useEffect } from "react";
 const categories: CategoryType[] = [
   {
     cat_type: "Backend",
@@ -57,9 +58,22 @@ const categories: CategoryType[] = [
 ];
 
 function Category() {
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("injection-site-shown");
+        } else {
+          entry.target.classList.remove("injection-site-shown");
+        }
+      });
+    });
+    const injector = document.querySelectorAll(".injection-site-hidden");
+    injector.forEach((el) => observer.observe(el));
+  }, []);
   return (
     <StyledCategory>
-      <div id="h1-div">Blog Categories</div>
+      <div id="h1-div" className="node-space-branding"><span className="injection-site-hidden"></span>Blog Categories</div>
       <div id="cat-wrapper">
         {categories.map((n, i) => {
           return (

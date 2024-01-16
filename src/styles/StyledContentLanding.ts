@@ -36,7 +36,7 @@ export const StyledContentLanding = styled.div`
   .writer {
     opacity: 0;
     color: white;
-    animation: ${writer} 0.4s ease-in-out forwards,
+    animation: ${writer} 1s ease-in-out forwards,
       ${changeColor2} 5s linear infinite;
     font-family: "Fira Code", monospace;
   }
@@ -70,6 +70,7 @@ export const StyledContentLanding = styled.div`
     h1 {
       font-size: 3.8rem;
       z-index: 10;
+      animation: ${writer} 1s ease-in-out forwards,
     }
   }
   img {
