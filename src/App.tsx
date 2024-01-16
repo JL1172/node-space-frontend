@@ -5,6 +5,8 @@ import { fetch_endpoint } from "./redux/actions-creators/sanity";
 import { AppProps } from "./global-dto/g-dtos";
 import { StyledApp } from "./styles/StyledApp";
 import LandingPage from "./components/LandingPage";
+import { Route, Routes } from "react-router-dom";
+import PageNotFound from "./components/PageNotFound";
 
 function App(props: AppProps) {
   useEffect(() => {
@@ -12,7 +14,10 @@ function App(props: AppProps) {
   },[])//eslint-disable-line
   return (
     <StyledApp>
-      <LandingPage />
+      <Routes>
+        <Route path = "/" element = {<LandingPage />} />
+        <Route path = "*" element = {<PageNotFound />} />
+      </Routes>
     </StyledApp>
   );
 }

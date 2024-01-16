@@ -85,7 +85,8 @@ function NodeSpace() {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("injection-site-shown");
-        } else {
+        } 
+        else {
           entry.target.classList.remove("injection-site-shown");
         }
       });

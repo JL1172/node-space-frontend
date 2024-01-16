@@ -6,6 +6,7 @@ import Content from "./landing-page-extras/Content";
 import Category from "./landing-page-extras/Categories";
 import SearchBar from "./landing-page-extras/SearchBar";
 import NodeSpace from "./landing-page-extras/NodeSpace";
+import Footer from "./landing-page-extras/Footer";
 
 function LandingPage(props: any) {
   return (
@@ -15,6 +16,7 @@ function LandingPage(props: any) {
       <SearchBar />
       <Category />
       <NodeSpace />
+      <Footer />
     </StyledLandingPage>
   );
 }
