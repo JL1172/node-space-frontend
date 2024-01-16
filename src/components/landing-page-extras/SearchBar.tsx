@@ -8,7 +8,7 @@ import icon2 from "../../global-imgs/icon2.png";
 function SearchBar() {
   return (
     <StyledSearchBar>
-      <div id="searchContainer">
+      <div id="searchContainer" className="shown">
         <input
           placeholder="Search blogs..."
           autoCorrect="on"
@@ -18,27 +18,27 @@ function SearchBar() {
         />
         <CiSearch id="searchIcon" />
       </div>
-      <div id = "buttonWrapper">
-      <Button 
-        sx={{
-          bgcolor: "white",
-          color: "black",
-          borderRadius: "5rem",
-          fontFamily: "inherit",
-          paddingLeft: "2rem",
-          paddingRight: "2rem",
-          height: "2.8rem",
-          "&:hover": {
-            bgcolor: "transparent",
-            color: "white",
-          },
-        }}
-        id="button"
-        variant="contained"
-      >
-        Search
-      </Button>
-      <img src={icon2} alt="Icon" />
+      <div id="buttonWrapper" className="shown">
+        <Button
+          sx={{
+            bgcolor: "white",
+            color: "black",
+            borderRadius: "5rem",
+            fontFamily: "inherit",
+            paddingLeft: "2rem",
+            paddingRight: "2rem",
+            height: "2.8rem",
+            "&:hover": {
+              bgcolor: "transparent",
+              color: "white",
+            },
+          }}
+          id="button"
+          variant="contained"
+        >
+          Search
+        </Button>
+        <img src={icon2} alt="Icon" />
       </div>
     </StyledSearchBar>
   );

@@ -10,3 +10,12 @@ export interface CategoryType {
   cat_desc: ReactElement<any, any>;
   cat_color: string;
 }
+
+export interface NodeSpaceDescriptionType {
+  media: string;
+  heading: string;
+  description: ReactElement<any, any> | undefined;
+  p1:undefined | ReactElement<any, any>;
+  p2:undefined | ReactElement<any, any>;
+  p3:undefined | ReactElement<any, any>;
+}

@@ -75,16 +75,16 @@ function Category() {
                   fontFamily: "inherit",
                   paddingLeft: "2rem",
                   paddingRight: "2rem",
-                  height: "2.8rem",
+                  height: "3rem",
+                  width: "100%",
                   "&:hover": {
                     bgcolor: n.cat_color,
-                    color: "white",
                   },
                 }}
                 id="button"
                 variant="contained"
               >
-                Explore {n.cat_type}
+                Explore {n.cat_type} Blogs
               </Button>
             </div>
           );

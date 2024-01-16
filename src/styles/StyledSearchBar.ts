@@ -7,6 +7,7 @@ export const StyledSearchBar = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
+  flex-wrap: wrap;
   #searchContainer {
     position: relative;
   }
@@ -48,7 +49,6 @@ export const StyledSearchBar = styled.div`
     height: 15dvh;
     right: 1rem;
   }
-
 @media screen and (max-width: 1066px) {
   #search {
     width: 30rem;
@@ -63,12 +63,54 @@ export const StyledSearchBar = styled.div`
   img {
     display: none;
   }
+}
+@media screen and (max-width: 650px) {
+  img {
+    display: none;
+  }
+  #searchIcon {
+    right: 1.2rem;
+  }
+ #searchContainer {
+    width: 75%;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+  }
   #search {
-    width: 68dvw;
+    width: 95%;
+    margin: 0;
 
   }
   #button {
-    width: 20dvw;
+    width: 95%;
+    margin: 0;
+  }
+}
+@media screen and (max-width: 500px) {
+  img {
+    display: none;
+  }
+  #searchIcon {
+    right: 1.2rem;
+  }
+ #searchContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+  }
+  #buttonWrapper {
+    width: 70%;
+  }
+  #search {
+    width: 95%;
+    margin: 0;
+
+  }
+  #button {
+    width: 95%;
+    margin: 0;
   }
 }
 `;

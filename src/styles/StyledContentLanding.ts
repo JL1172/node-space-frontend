@@ -94,8 +94,8 @@ export const StyledContentLanding = styled.div`
   }
   @media screen and (max-width: 800px) {
     img {
-      width: 8rem;
-      height: 7rem;
+      width: 9rem;
+      height: 8rem;
     }
     #node-wrapper {
       padding: 2.5dvw;
@@ -136,6 +136,7 @@ export const StyledContentLanding = styled.div`
     img {
       width: 5rem;
       height: 5rem;
+      border-radius: 10rem;
     }
     #node-wrapper {
       padding: 0;
