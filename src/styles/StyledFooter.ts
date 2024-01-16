@@ -46,4 +46,13 @@ export const StyledFooter = styled.div`
       transition: 100ms ease-in-out;
     }
   }
+  @media screen and (max-width: 820px) {
+    .f-divs {
+       flex-grow: 2;
+       margin: 2rem;
+       #social-wrapper {
+        width: 10rem;
+       }
+    }
+  }
 `;
