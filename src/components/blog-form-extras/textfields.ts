@@ -1,6 +1,6 @@
 export const textFieldContent: string[] = [
     "Blog Title",
-    "Author Name...",
+    "Author Name",
 ]
 // "Tags/Keywords...",
 // "Blog Subcategories...",

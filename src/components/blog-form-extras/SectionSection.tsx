@@ -22,7 +22,7 @@ export default function SecondSection() {
       <div className="h4-div">
         Second, Choose Which Category And Keywords Best Represent This Blog
       </div>
-      <FormControl sx={{ width: "50%", marginBottom: ".5rem" }}>
+      <FormControl className="text-field-class" sx={{  marginBottom: ".5rem" }}>
         <InputLabel
           id="demo-simple-select-label"
           sx={{
@@ -84,7 +84,8 @@ export default function SecondSection() {
             {option.title}
           </li>
         )}
-        style={{ width: "50%" }}
+        className="text-field-class"
+        // style={{ width: "50%" }}
         renderInput={(params) => (
           <TextField
             {...params}
@@ -111,6 +112,7 @@ export default function SecondSection() {
         <Alert
           variant="outlined"
           style={{
+            marginTop: "1rem",
             width: "100%",
             color: "white",
             marginBottom: "3rem",

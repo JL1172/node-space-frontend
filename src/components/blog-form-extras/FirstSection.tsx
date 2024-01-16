@@ -14,7 +14,8 @@ export default function FirstSection() {
             inputProps={{ style: { color: "white" } }}
             InputLabelProps={{ style: { color: "white" } }}
             label={n}
-            sx={{ width: "50%" }}
+            // sx={{ width: "50%" }}
+            className="text-field-class"
           />
         );
       })}
