@@ -1,0 +1,1 @@
+export const FORMSPREE_ENDPOINT: string = "https://formspree.io/f/meqyonwa";

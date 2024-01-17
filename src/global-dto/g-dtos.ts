@@ -22,8 +22,8 @@ export interface NodeSpaceDescriptionType {
 
 export interface DivCategoryFooterType {
   head: string;
-  cat_1: string | undefined;
-  cat_2: string | undefined;
-  cat_3: string | undefined;
-  cat_4: string | undefined;
+  cat_1: string | undefined | ReactElement<any>;
+  cat_2: string | undefined | ReactElement<any>;
+  cat_3: string | undefined | ReactElement<any>;
+  cat_4: string | undefined | ReactElement<any>;
 }

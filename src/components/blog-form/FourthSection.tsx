@@ -1,6 +1,6 @@
 import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import { VisuallyHiddenInput } from "./themes/upload-media-theme";
+import { VisuallyHiddenInput } from "./blog-form-themes/upload-media-theme";
 
 export default function FourthSection() {
   return (

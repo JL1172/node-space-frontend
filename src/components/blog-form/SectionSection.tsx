@@ -5,7 +5,7 @@ import {
   MenuItem,
   Select,
 } from "@mui/material";
-import { selectStyle } from "./themes/select-theme";
+import { selectStyle } from "./blog-form-themes/select-theme";
 import * as React from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";

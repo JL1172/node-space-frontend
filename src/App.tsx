@@ -8,6 +8,7 @@ import LandingPage from "./components/LandingPage";
 import { Route, Routes } from "react-router-dom";
 import PageNotFound from "./components/PageNotFound";
 import BlogForm from "./components/BlogForm";
+import ContactForm from "./components/ContactForm";
 
 function App(props: AppProps) {
   useEffect(() => {
@@ -18,6 +19,7 @@ function App(props: AppProps) {
       <Routes>
         <Route path = "/" element = {<LandingPage />} />
         <Route path = "/admin/login/blog-form" element = {<BlogForm />} />
+        <Route path = "/contact-form" element = {<ContactForm />} />
         <Route path = "*" element = {<PageNotFound />} />
       </Routes>
     </StyledApp>

@@ -1,6 +1,6 @@
 import { ThemeProvider } from "@mui/material/styles";
 import { StyledBlogForm } from "../styles/blog-form/StyledBlogForm";
-import { theme } from "./blog-form/themes/input-theme";
+import { theme } from "./blog-form/blog-form-themes/input-theme";
 import FirstSection from "./blog-form/FirstSection";
 import SecondSection from "./blog-form/SectionSection";
 import ThirdSection from "./blog-form/ThirdSections";
