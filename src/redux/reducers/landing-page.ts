@@ -1,5 +1,5 @@
 import { SANITY, SANITY_ERROR } from "../action-types/landing-page";
-import { ActionPayload, LandingState } from "../dtos/dtos";
+import { ActionPayload, LandingState } from "../redux-dtos/dtos";
 
 const inititalState: LandingState = {
   sanity_message: "",

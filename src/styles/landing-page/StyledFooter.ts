@@ -21,11 +21,11 @@ export const StyledFooter = styled.div`
   .f-div-head {
     font-size: 28px;
     font-weight: bold;
-    color: rgb(21, 21, 21);
+    color: whitesmoke;
     text-align: center;
   }
   .f-cat-div {
-    color: rgb(21, 21, 21);
+    color: whitesmoke;
     &:hover {
         color: white;
         transition: 100ms ease-in-out;
@@ -39,7 +39,7 @@ export const StyledFooter = styled.div`
   .social-icons {
     width: 1.8rem;
     height: 1.8rem;
-    color: rgb(21, 21, 21);
+    color: whitesmoke;
     &:hover {
       transform: scale(105%);
       color: white;

@@ -1,4 +1,4 @@
-import { ActionPayload } from "../dtos/dtos";
+import { ActionPayload } from "../redux-dtos/dtos";
 import { SANITY, SANITY_ERROR } from "../action-types/landing-page";
 import { sanity_endpoint } from "../../api/sanity";
 import { ThunkDispatch } from "redux-thunk";

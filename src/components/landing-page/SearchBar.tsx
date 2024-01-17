@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { RootState } from "../../redux/reducers/root-reducers";
-import { StyledSearchBar } from "../../styles/StyledSearchBar";
+import { StyledSearchBar } from "../../styles/landing-page/StyledSearchBar";
 import { CiSearch } from "react-icons/ci";
 import { Button } from "@mui/material";
 import icon2 from "../../global-imgs/icon2.png";

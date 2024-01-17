@@ -1,5 +1,5 @@
 import { Alert, TextField } from "@mui/material";
-import { textFieldContent } from "./textfields";
+import { textFieldContent } from "./blog-form-utils/textfields";
 
 export default function FirstSection() {
   return (

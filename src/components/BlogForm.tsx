@@ -1,11 +1,11 @@
 import { ThemeProvider } from "@mui/material/styles";
-import { StyledBlogForm } from "../styles/StyledBlogForm";
-import { theme } from "./blog-form-extras/input-theme";
-import FirstSection from "./blog-form-extras/FirstSection";
-import SecondSection from "./blog-form-extras/SectionSection";
-import ThirdSection from "./blog-form-extras/ThirdSections";
-import FourthSection from "./blog-form-extras/FourthSection";
-import FifthSection from "./blog-form-extras/FifthSection";
+import { StyledBlogForm } from "../styles/blog-form/StyledBlogForm";
+import { theme } from "./blog-form/themes/input-theme";
+import FirstSection from "./blog-form/FirstSection";
+import SecondSection from "./blog-form/SectionSection";
+import ThirdSection from "./blog-form/ThirdSections";
+import FourthSection from "./blog-form/FourthSection";
+import FifthSection from "./blog-form/FifthSection";
 
 export default function BlogForm() {
   return (

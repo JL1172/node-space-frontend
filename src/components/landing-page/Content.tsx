@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { RootState } from "../../redux/reducers/root-reducers";
-import { StyledContentLanding } from "../../styles/StyledContentLanding";
+import { StyledContentLanding } from "../../styles/landing-page/StyledContentLanding";
 import iconImage from "../../global-imgs/icon.png";
 import { BsHexagonFill } from "react-icons/bs";
 function Content() {
