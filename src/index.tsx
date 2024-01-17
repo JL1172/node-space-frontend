@@ -13,6 +13,7 @@ import {
 import { thunk } from "redux-thunk";
 import { rootReducer } from "./redux/reducers/root-reducers";
 import { Auth0Provider } from "@auth0/auth0-react";
+import { CLIENT_ID, DOMAIN, REDIRECT } from "./utils/auth0-utils";
 
 declare global {
   interface Window {
@@ -28,10 +29,10 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <Auth0Provider
-    domain="dev-eqszr7hd3w01e1xb.us.auth0.com"
-    clientId="Q4jeVi9bgbPeMJJBGRHQPFDFnPSYAdqG"
+    domain={DOMAIN}
+    clientId={CLIENT_ID}
     authorizationParams={{
-      redirect_uri: "http://localhost:3000/admin/login/blog-form",
+      redirect_uri: REDIRECT,
     }}
     useRefreshTokens={true}
     cacheLocation="memory"

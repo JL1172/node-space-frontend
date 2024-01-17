@@ -10,12 +10,15 @@ import { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
 import { IoReturnUpBackSharp } from "react-icons/io5";
+
 export default function BlogForm() {
   const nav = useNavigate();
   const { isAuthenticated, isLoading, logout } = useAuth0();
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
       nav("/");
+    } else {
+      window.localStorage.setItem("Login_State", JSON.stringify(true));
     }
   }, [isAuthenticated, isLoading, nav]);
   const advancedLogout = () => {
@@ -27,9 +30,9 @@ export default function BlogForm() {
       {isAuthenticated && (
         <form>
           <div id="h1-div" className="spec-h1-div">
-            <span id="io-icon">
+            <span onClick={() => advancedLogout()} id="io-icon">
               <IoReturnUpBackSharp />
-              <div onClick={() => advancedLogout()}>Return</div>
+              <div>Return</div>
             </span>{" "}
             Create Blog Form
           </div>
