@@ -46,6 +46,11 @@ export const StyledFooter = styled.div`
       transition: 100ms ease-in-out;
     }
   }
+  #logo {
+    width: 5rem;
+    border-radius: 100%;
+    
+  }
   @media screen and (max-width: 820px) {
     .f-divs {
        flex-grow: 2;

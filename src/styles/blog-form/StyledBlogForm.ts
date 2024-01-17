@@ -20,10 +20,38 @@ export const StyledBlogForm = styled.div`
     justify-content: space-evenly;
     align-items: center;
   }
+  .spec-h1-div {
+    width: 100%;
+    text-align: center;
+  }
+  #io-icon {
+    position: absolute;
+    left: 1rem;
+    top: 0;
+    display: flex;  
+    align-items: center;
+    justify-content: space-evenly;
+    width: 10%;
+    transition: 100ms ease-in-out;
+    cursor: pointer;
+    border-radius: 10rem;
+    &:hover{
+      color: dodgerblue;
+      transition: 100ms ease-in-out;
+      outline: 1px solid rgb(51, 51, 51);
+    }
+    &:active {
+      background-color: rgb(51, 51, 51);
+    }
+    div {
+      font-size: 14px;
+    }
+  }
   #h1-div {
     font-size: 28px;
     font-weight: bold;
     margin-bottom: 3rem;
+    position: relative;
   }
   .first-part-div {
     width: 100%;
