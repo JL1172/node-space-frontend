@@ -15,9 +15,9 @@ export interface NodeSpaceDescriptionType {
   media: string;
   heading: string;
   description: ReactElement<any, any> | undefined;
-  p1:undefined | ReactElement<any, any>;
-  p2:undefined | ReactElement<any, any>;
-  p3:undefined | ReactElement<any, any>;
+  p1: undefined | ReactElement<any, any>;
+  p2: undefined | ReactElement<any, any>;
+  p3: undefined | ReactElement<any, any>;
 }
 
 export interface DivCategoryFooterType {
@@ -26,4 +26,15 @@ export interface DivCategoryFooterType {
   cat_2: string | undefined | ReactElement<any>;
   cat_3: string | undefined | ReactElement<any>;
   cat_4: string | undefined | ReactElement<any>;
+}
+export interface FormStateType {
+  category: string;
+  fullName: string;
+  email: string;
+  message: string;
+  disabled: boolean;
+  eCat: string;
+  eMessage: string;
+  eFull: string;
+  eEmail: string;
 }
