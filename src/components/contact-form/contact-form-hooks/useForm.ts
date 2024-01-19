@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { FormStateType } from "../../../global-dto/g-dtos";
 import { FORMSPREE_ENDPOINT } from "../../../utils/formspree-utils";
 import { schema } from "../contact-form-utils/yup-schema-utils";
@@ -52,11 +51,9 @@ export const useForm = (
       };
       axios
         .post(FORMSPREE_ENDPOINT, payload)
-        .then((res) => {
-          console.log(res);
-        })
+        .then()
         .catch((err) => {
-          console.log(err);
+          alert(err.message);
         })
         .finally(() => {
           setTimeout(() => {
