@@ -28,14 +28,14 @@ export const StyledBlogForm = styled.div`
     position: absolute;
     left: 1rem;
     top: 0;
-    display: flex;  
+    display: flex;
     align-items: center;
     justify-content: space-evenly;
     width: 10%;
     transition: 100ms ease-in-out;
     cursor: pointer;
     border-radius: 10rem;
-    &:hover{
+    &:hover {
       color: dodgerblue;
       transition: 100ms ease-in-out;
       outline: 1px solid rgb(51, 51, 51);
@@ -139,7 +139,7 @@ export const StyledBlogForm = styled.div`
     }
     .first-part-div {
       height: 50dvh;
-      .h4-div{
+      .h4-div {
         width: 98%;
       }
     }
@@ -154,7 +154,7 @@ export const StyledBlogForm = styled.div`
     .paragraph-div {
       justify-content: space-around;
       .h4-div {
-        margin-top: .5rem;
+        margin-top: 0.5rem;
       }
     }
     .first-part-div {
@@ -164,6 +164,7 @@ export const StyledBlogForm = styled.div`
         margin-top: 0;
       }
     }
+
     /* #blog-upload {
       width: 75%;
     }
@@ -186,15 +187,37 @@ export const StyledBlogForm = styled.div`
     } */
   }
   @media screen and (max-width: 490px) {
+form {
+  width: 97%;
+  border: 0;
+  border-top: 1px solid rgb(51, 51, 51);
+  border-bottom: 1px solid rgb(51, 51, 51);
+}
+    #io-icon {
+      position: sticky;
+      background-color: rgb(21, 21, 21);
+      border: 1px solid rgb(51, 51, 51);
+      z-index: 5;
+      width: 90%;
+      justify-content: center;
+      height: 2rem;
+      margin-bottom: 1rem;
+      margin-top: 1rem;
+      div {
+        margin-left: 1rem;
+      }
+    }
     .paragraph-div {
       justify-content: space-around;
+      width: 96%;
       .h4-div {
-        margin-top: .5rem;
+        margin-top: 0.5rem;
       }
     }
     .first-part-div {
       height: 75dvh;
       justify-content: space-around;
+      width: 96%;
       .h4-div {
         margin-top: 0;
       }
@@ -205,7 +228,7 @@ export const StyledBlogForm = styled.div`
     #upload-div {
       width: 99% !important;
       display: flex;
-      align-items: center ;    
+      align-items: center;
     }
     .buttons-class {
       width: 75%;
@@ -213,7 +236,7 @@ export const StyledBlogForm = styled.div`
     .media-div {
       width: 99%;
       display: flex;
-      align-items: center ;
+      align-items: center;
       .h4-div {
         width: 98%;
         text-align: center;

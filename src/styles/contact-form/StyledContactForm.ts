@@ -119,6 +119,8 @@ export const StyledContactForm = styled.div`
     }
     #home-return-icon {
       position: sticky;
+      background-color: rgb(21,21,21);
+      z-index: 5;
       width: 90%;
       justify-content: center;
       height: 2rem;
