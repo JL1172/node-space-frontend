@@ -4,6 +4,7 @@ import { theme } from "./contact-form/contact-form-themes/input-theme";
 import icon6 from "../global-imgs/icon6.png";
 import { selectFieldContent } from "./contact-form/contact-form-utils/textfield-utils";
 import {
+  Alert,
   Button,
   FormControl,
   InputLabel,
@@ -11,7 +12,6 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import { selectStyle } from "./blog-form/blog-form-themes/select-theme";
 import { IoReturnUpBackSharp } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import {
@@ -25,7 +25,7 @@ export default function ContactForm() {
     "Form_Data",
     initialState
   );
-
+  console.log(formData.errors);
   return (
     <StyledContactForm>
       <ThemeProvider theme={theme}>
@@ -41,66 +41,191 @@ export default function ContactForm() {
               <IoReturnUpBackSharp />
               <div>Home</div>
             </span>
-            <FormControl className="form-inputs select-input">
-              <InputLabel
-                id="demo-simple-select-label"
-                sx={{
-                  color: "white",
-                  "&.Mui-focused": {
-                    color: "white", // Set the color for the focused state
+            <span className="spans">
+              <FormControl
+                error={formData.errors.filter((n: any) => n.errCat).length > 0}
+                className="form-inputs select-input"
+              >
+                <InputLabel
+                  id="demo-simple-select-label"
+                  sx={{
+                    color: "white",
+                    "&.Mui-focused": {
+                      color: "white", // Set the color for the focused state
+                    },
+                  }}
+                >
+                  Contact Category*
+                </InputLabel>
+                <Select
+                  name="category"
+                  value={formData.category}
+                  onChange={(e) => changeHandler(e.target.name, e.target.value)}
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  label="Contact Category"
+                  sx={{
+                    color: "white",
+                    "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                      borderColor: "white",
+                    },
+                    "&:hover .MuiOutlinedInput-notchedOutline": {
+                      borderColor: "lightgray",
+                    },
+                    "& .MuiSvgIcon-root": {
+                      color:
+                        formData.errors.filter((n: any) => n.errCat).length > 0
+                          ? "#f44336"
+                          : "white",
+                      zIndex: "5",
+                    },
+                    "&.Mui-focused .MuiSvgIcon-root": {
+                      color:
+                        formData.errors.filter((n: any) => n.errCat).length > 0
+                          ? "white"
+                          : "white",
+                      zIndex: "5",
+                    },
+                    "& .MuiSelect-select": {
+                      backgroundColor: "rgb(51, 51, 51)", // Adjust the background color for the selected state
+                    },
+                  }}
+                >
+                  {selectFieldContent.map((n, i) => {
+                    return (
+                      <MenuItem key={i} value={n}>
+                        {n}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+              {formData.errors.filter((n: any) => n.errCat).length > 0 && (
+                <Alert className = "alerts" variant="outlined" severity="error">
+                  {formData.errors[0].errCat}
+                </Alert>
+              )}
+            </span>
+            <span className="spans">
+              <TextField
+                className="form-inputs fname"
+                onChange={(e) => changeHandler(e.target.name, e.target.value)}
+                name={"fullName"}
+                value={formData.fullName}
+                InputLabelProps={{
+                  style: {
+                    color:
+                      formData.errors.filter((n: any) => n.errFull).length > 0
+                        ? ""
+                        : "white",
                   },
                 }}
-              >
-                Contact Category*
-              </InputLabel>
-              <Select
-                name="category"
-                value={formData.category}
+                sx={{
+                  "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+                    borderColor:
+                      formData.errors.filter((n: any) => n.errFull).length > 0
+                        ? "#f44336"
+                        : "white",
+                  },
+                  "& .MuiInputLabel-root": {
+                    color:
+                      formData.errors.filter((n: any) => n.errFull).length > 0
+                        ? "#f44336"
+                        : "white",
+                  },
+                  "& .MuiInputLabel-shrink": {
+                    color: "white",
+                  },
+                }}
+                label={"Full Name*"}
+              />
+              {formData.errors.filter((n: any) => n.errFull).length > 0 && (
+                <Alert className = "alerts" variant="outlined" severity="error">
+                  {formData.errors[1].errFull}
+                </Alert>
+              )}
+            </span>
+            <span className="spans">
+              <TextField
+                className="form-inputs "
                 onChange={(e) => changeHandler(e.target.name, e.target.value)}
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                label="Contact Category"
-                sx={selectStyle}
-              >
-                {selectFieldContent.map((n, i) => {
-                  return (
-                    <MenuItem key={i} value={n}>
-                      {n}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
-            </FormControl>
-            <TextField
-              className="form-inputs"
-              onChange={(e) => changeHandler(e.target.name, e.target.value)}
-              name={"fullName"}
-              value={formData.fullName}
-              inputProps={{ style: { color: "white" } }}
-              InputLabelProps={{ style: { color: "white" } }}
-              label={"Full Name"}
-            />
-            <TextField
-              className="form-inputs"
-              onChange={(e) => changeHandler(e.target.name, e.target.value)}
-              name={"email"}
-              value={formData.email}
-              inputProps={{ style: { color: "white" } }}
-              InputLabelProps={{ style: { color: "white" } }}
-              label={"Email"}
-            />
-            <TextField
-              className="form-inputs"
-              onChange={(e) => changeHandler(e.target.name, e.target.value)}
-              name={"message"}
-              value={formData.message}
-              multiline
-              minRows={5}
-              sx={{ bgcolor: "rgb(51,51,51)" }}
-              inputProps={{ style: { color: "white" } }}
-              InputLabelProps={{ style: { color: "white" } }}
-              label={"Message*"}
-            />
+                name={"email"}
+                value={formData.email}
+                InputLabelProps={{
+                  style: {
+                    color:
+                      formData.errors.filter((n: any) => n.errEmail).length > 0
+                        ? ""
+                        : "white",
+                  },
+                }}
+                sx={{
+                  "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+                    borderColor:
+                      formData.errors.filter((n: any) => n.errEmail).length > 0
+                        ? "#f44336"
+                        : "white",
+                  },
+                  "& .MuiInputLabel-root": {
+                    color:
+                      formData.errors.filter((n: any) => n.errEmail).length > 0
+                        ? "#f44336"
+                        : "white",
+                  },
+                  "& .MuiInputLabel-shrink": {
+                    color: "white",
+                  },
+                }}
+                label={"Email*"}
+              />
+              {formData.errors.filter((n: any) => n.errEmail).length > 0 && (
+                <Alert className = "alerts" variant="outlined" severity="error">
+                  {formData.errors[2].errEmail}
+                </Alert>
+              )}
+            </span>
+            <span className="spans">
+              <TextField
+                className="form-inputs"
+                onChange={(e) => changeHandler(e.target.name, e.target.value)}
+                name={"message"}
+                value={formData.message}
+                multiline
+                minRows={5}
+                InputLabelProps={{
+                  style: {
+                    color:
+                      formData.errors.filter((n: any) => n.errFull).length > 0
+                        ? ""
+                        : "white",
+                  },
+                }}
+                sx={{
+                  bgcolor: "rgb(51,51,51)",
+                  "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+                    borderColor:
+                      formData.errors.filter((n: any) => n.errFull).length > 0
+                        ? "#f44336"
+                        : "white",
+                  },
+                  "& .MuiInputLabel-root": {
+                    color:
+                      formData.errors.filter((n: any) => n.errFull).length > 0
+                        ? "#f44336"
+                        : "white",
+                  },
+                  "& .MuiInputLabel-shrink": {
+                    color: "white",
+                  },
+                }}
+                label={"Message*"}
+              />
+                 {formData.errors.filter((n: any) => n.errMessage).length > 0 && (
+                <Alert className = "alerts" variant="outlined" severity="error">
+                  {formData.errors[3].errMessage}
+                </Alert>
+              )}
+            </span>
             <Button
               onClick={(e) => submitHandler(e)}
               sx={{
@@ -122,7 +247,7 @@ export default function ContactForm() {
             </Button>
           </form>
           <div id="second-box">
-            <div id = "contact-us">Contact Me</div>
+            <div id="contact-us">Contact Me</div>
             <img src={icon6} alt="icon" />
           </div>
         </div>

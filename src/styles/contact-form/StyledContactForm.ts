@@ -18,7 +18,7 @@ export const StyledContactForm = styled.div`
     width: 50%;
     display: flex;
     flex-direction: column;
-    min-height: 85dvh;
+    min-height: 90dvh;
     height: fit-content;
     justify-content: space-evenly;
     align-items: center;
@@ -26,10 +26,21 @@ export const StyledContactForm = styled.div`
     border-right: 1px solid rgb(51, 51, 51);
   }
   .select-input {
-    margin-top: 1.5rem;
+    margin-top: 2rem;
   }
   .form-inputs {
     width: 90%;
+  }
+  .alerts {
+    width: 90%;
+    position: sticky;
+  }
+  .spans {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     margin-bottom: 1rem;
   }
   #home-return-icon {
