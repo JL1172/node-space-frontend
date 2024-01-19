@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { FormStateType } from "../../../global-dto/g-dtos";
 import { FORMSPREE_ENDPOINT } from "../../../utils/formspree-utils";
 import { schema } from "../contact-form-utils/yup-schema-utils";
@@ -10,7 +11,6 @@ export const initialState: FormStateType = {
   email: "",
   message: "",
   errors: [],
-  spinnerOn: false,
 };
 
 export const useForm = (key: string, state: FormStateType): any[] => {
@@ -34,10 +34,8 @@ export const useForm = (key: string, state: FormStateType): any[] => {
   const changeHandler = (name: string, value: string) => {
     setData({ ...data, [name]: value });
   };
-
   const submitHandler = async (e: Event) => {
     e.preventDefault();
-    setData({ ...data, spinnerOn: true });
     const result: boolean | undefined = await formValidation();
     if (result === true) {
       const { category, fullName, email, message } = data;
@@ -55,14 +53,8 @@ export const useForm = (key: string, state: FormStateType): any[] => {
         .catch((err) => {
           console.log(err);
         })
-        .finally(() => {
-          setTimeout(() => {
-            setData({ ...data, spinnerOn: false });
-          }, 100);
-        });
-    } else {
-      setData({ ...data, spinnerOn: false });
+        .finally(() => {});
     }
   };
-  return [data, changeHandler, submitHandler, formValidation];
+  return [data, changeHandler, submitHandler, formValidation ];
 };

@@ -3,13 +3,14 @@ import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "./contact-form/contact-form-themes/input-theme";
 import icon6 from "../global-imgs/icon6.png";
 import { selectFieldContent } from "./contact-form/contact-form-utils/textfield-utils";
-import LoadingButton from '@mui/lab/LoadingButton';
-import SaveIcon from '@mui/icons-material/Save';
+
 import {
   Alert,
+  Box,
   Button,
   FormControl,
   InputLabel,
+  LinearProgress,
   MenuItem,
   Select,
   TextField,
@@ -20,13 +21,22 @@ import {
   initialState,
   useForm,
 } from "./contact-form/contact-form-hooks/useForm";
+
 export default function ContactForm() {
   const key: string = "Form_Data";
   const nav = useNavigate();
   const [formData, changeHandler, submitHandler] = useForm(key, initialState);
+  const advanced = (e: any) => {
+    submitHandler(e);
+  };
   return (
     <StyledContactForm>
       <ThemeProvider theme={theme}>
+        {/* {spinnerOn && (
+          <Box sx={{ position: "fixed", top: 0, width: "100%" }}>
+            <LinearProgress />
+          </Box>
+        )} */}
         <div id="outer-wrapper">
           <form id="first-box" onSubmit={(e) => e.preventDefault()}>
             <span
@@ -233,38 +243,26 @@ export default function ContactForm() {
                 </Alert>
               )}
             </span>
-            { !formData.spinnerOn &&
-              <Button
-                onClick={(e) => submitHandler(e)}
-                sx={{
-                  bgcolor: "white",
-                  color: "black",
-                  fontFamily: "inherit",
-                  paddingLeft: "2rem",
-                  paddingRight: "2rem",
-                  marginBottom: "1rem",
-                  height: "3rem",
-                  "&:hover": {
-                    bgcolor: "transparent",
-                    color: "white",
-                  },
-                }}
-                id="button"
-                variant="contained"
-              >
-                Share Your Feedback
-              </Button>
-            }
-            {formData.spinnerOn && 
-            <LoadingButton
-            loading
-            loadingPosition="start"
-            startIcon={<SaveIcon />}
-            variant="outlined"
-          >
-            Save
-          </LoadingButton>
-            }
+            <Button
+              onClick={(e) => advanced(e)}
+              sx={{
+                bgcolor: "white",
+                color: "black",
+                fontFamily: "inherit",
+                paddingLeft: "2rem",
+                paddingRight: "2rem",
+                marginBottom: "1rem",
+                height: "3rem",
+                "&:hover": {
+                  bgcolor: "transparent",
+                  color: "white",
+                },
+              }}
+              id="button"
+              variant="contained"
+            >
+              Share Your Feedback
+            </Button>
           </form>
           <div id="second-box">
             <div id="contact-us">Contact Me</div>
