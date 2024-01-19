@@ -1,9 +1,13 @@
 import { StyledContactForm } from "../styles/contact-form/StyledContactForm";
 import { ThemeProvider } from "@mui/material/styles";
-import { theme } from "./contact-form/contact-form-themes/input-theme";
+import {
+  buttonSx,
+  theme,
+} from "./contact-form/contact-form-themes/input-theme";
 import icon6 from "../global-imgs/icon6.png";
 import { selectFieldContent } from "./contact-form/contact-form-utils/textfield-utils";
-
+import SaveIcon from "@mui/icons-material/Save";
+import CheckIcon from "@mui/icons-material/Check";
 import {
   Alert,
   Box,
@@ -21,22 +25,32 @@ import {
   initialState,
   useForm,
 } from "./contact-form/contact-form-hooks/useForm";
+import { useState } from "react";
+import { LoadingButton } from "@mui/lab";
 
 export default function ContactForm() {
   const key: string = "Form_Data";
   const nav = useNavigate();
-  const [formData, changeHandler, submitHandler] = useForm(key, initialState);
+  const [spinnerOn, setSpinnerOn] = useState(false);
+  const [successMessage, setSuccessMessage] = useState(false);
+  const [formData, changeHandler, submitHandler] = useForm(
+    key,
+    initialState,
+    setSpinnerOn,
+    setSuccessMessage
+  );
   const advanced = (e: any) => {
+    setSpinnerOn(!spinnerOn);
     submitHandler(e);
   };
   return (
     <StyledContactForm>
       <ThemeProvider theme={theme}>
-        {/* {spinnerOn && (
+        {spinnerOn && (
           <Box sx={{ position: "fixed", top: 0, width: "100%" }}>
             <LinearProgress />
           </Box>
-        )} */}
+        )}
         <div id="outer-wrapper">
           <form id="first-box" onSubmit={(e) => e.preventDefault()}>
             <span
@@ -243,26 +257,54 @@ export default function ContactForm() {
                 </Alert>
               )}
             </span>
-            <Button
-              onClick={(e) => advanced(e)}
-              sx={{
-                bgcolor: "white",
-                color: "black",
-                fontFamily: "inherit",
-                paddingLeft: "2rem",
-                paddingRight: "2rem",
-                marginBottom: "1rem",
-                height: "3rem",
-                "&:hover": {
-                  bgcolor: "transparent",
-                  color: "white",
-                },
-              }}
-              id="button"
-              variant="contained"
-            >
-              Share Your Feedback
-            </Button>
+            {spinnerOn && !successMessage ? (
+              <LoadingButton
+                loading
+                loadingPosition="start"
+                startIcon={<SaveIcon />}
+                variant="outlined"
+                sx={{
+                  bgcolor: "white",
+                  color: "blue",
+                  fontFamily: "inherit",
+                  paddingLeft: "2rem",
+                  paddingRight: "2rem",
+                  marginBottom: "1rem",
+                  height: "3rem",
+                  width: "50%",
+                }}
+                id="button"
+              >
+                Loading...
+              </LoadingButton>
+            ) : !spinnerOn && successMessage ? (
+              <Button variant="contained" sx={buttonSx}>
+                <CheckIcon sx={{marginRight: "1rem"}} />
+                Successfully Sent
+              </Button>
+            ) : (
+              <Button
+                onClick={(e) => advanced(e)}
+                sx={{
+                  bgcolor: "white",
+                  color: "black",
+                  fontFamily: "inherit",
+                  paddingLeft: "2rem",
+                  paddingRight: "2rem",
+                  marginBottom: "1rem",
+                  height: "3rem",
+                  width: "50%",
+                  "&:hover": {
+                    bgcolor: "transparent",
+                    color: "white",
+                  },
+                }}
+                id="button"
+                variant="contained"
+              >
+                Share Your Feedback
+              </Button>
+            )}
           </form>
           <div id="second-box">
             <div id="contact-us">Contact Me</div>

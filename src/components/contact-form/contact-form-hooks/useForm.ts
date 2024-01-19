@@ -13,7 +13,12 @@ export const initialState: FormStateType = {
   errors: [],
 };
 
-export const useForm = (key: string, state: FormStateType): any[] => {
+export const useForm = (
+  key: string,
+  state: FormStateType,
+  setSpinnerOn: any,
+  setSuccessMessage: any
+): any[] => {
   const [data, setData] = useLocalStorage(key, state);
 
   const formValidation = async () => {
@@ -53,8 +58,20 @@ export const useForm = (key: string, state: FormStateType): any[] => {
         .catch((err) => {
           console.log(err);
         })
-        .finally(() => {});
+        .finally(() => {
+          setTimeout(() => {
+            window.localStorage.clear();
+            setData(initialState);
+            setSpinnerOn(false);
+            setSuccessMessage(true);
+          }, 500);
+          setTimeout(() => {
+            setSuccessMessage(false);
+          }, 3000);
+        });
+    } else {
+      setSpinnerOn(false);
     }
   };
-  return [data, changeHandler, submitHandler, formValidation ];
+  return [data, changeHandler, submitHandler, formValidation];
 };

@@ -114,6 +114,9 @@ export const StyledContactForm = styled.div`
     }
   }
   @media screen and (max-width: 500px) {
+    #button {
+      width: 85%;
+    }
     #home-return-icon {
       position: sticky;
       width: 90%;
