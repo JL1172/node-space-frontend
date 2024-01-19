@@ -128,7 +128,7 @@ export const StyledContactForm = styled.div`
     #first-box {
       min-height: 100dvh;
     }
-    .form-inputs {
+    .spans{
       margin-bottom: 2rem;
     }
     #second-box {

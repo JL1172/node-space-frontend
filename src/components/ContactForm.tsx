@@ -3,6 +3,8 @@ import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "./contact-form/contact-form-themes/input-theme";
 import icon6 from "../global-imgs/icon6.png";
 import { selectFieldContent } from "./contact-form/contact-form-utils/textfield-utils";
+import LoadingButton from '@mui/lab/LoadingButton';
+import SaveIcon from '@mui/icons-material/Save';
 import {
   Alert,
   Button,
@@ -18,14 +20,10 @@ import {
   initialState,
   useForm,
 } from "./contact-form/contact-form-hooks/useForm";
-
 export default function ContactForm() {
+  const key: string = "Form_Data";
   const nav = useNavigate();
-  const [formData, changeHandler, submitHandler] = useForm(
-    "Form_Data",
-    initialState
-  );
-  console.log(formData.errors);
+  const [formData, changeHandler, submitHandler] = useForm(key, initialState);
   return (
     <StyledContactForm>
       <ThemeProvider theme={theme}>
@@ -101,13 +99,14 @@ export default function ContactForm() {
                 </Select>
               </FormControl>
               {formData.errors.filter((n: any) => n.errCat).length > 0 && (
-                <Alert className = "alerts" variant="outlined" severity="error">
-                  {formData.errors[0].errCat}
+                <Alert className="alerts" variant="outlined" severity="error">
+                  {formData.errors.filter((n: any) => n.errCat)[0].errCat}
                 </Alert>
               )}
             </span>
             <span className="spans">
               <TextField
+                inputProps={{ style: { color: "white" } }}
                 className="form-inputs fname"
                 onChange={(e) => changeHandler(e.target.name, e.target.value)}
                 name={"fullName"}
@@ -140,13 +139,14 @@ export default function ContactForm() {
                 label={"Full Name*"}
               />
               {formData.errors.filter((n: any) => n.errFull).length > 0 && (
-                <Alert className = "alerts" variant="outlined" severity="error">
-                  {formData.errors[1].errFull}
+                <Alert className="alerts" variant="outlined" severity="error">
+                  {formData.errors.filter((n: any) => n.errFull)[0].errFull}
                 </Alert>
               )}
             </span>
             <span className="spans">
               <TextField
+                inputProps={{ style: { color: "white" } }}
                 className="form-inputs "
                 onChange={(e) => changeHandler(e.target.name, e.target.value)}
                 name={"email"}
@@ -179,13 +179,14 @@ export default function ContactForm() {
                 label={"Email*"}
               />
               {formData.errors.filter((n: any) => n.errEmail).length > 0 && (
-                <Alert className = "alerts" variant="outlined" severity="error">
-                  {formData.errors[2].errEmail}
+                <Alert className="alerts" variant="outlined" severity="error">
+                  {formData.errors.filter((n: any) => n.errEmail)[0].errEmail}
                 </Alert>
               )}
             </span>
             <span className="spans">
               <TextField
+                inputProps={{ style: { color: "white" } }}
                 className="form-inputs"
                 onChange={(e) => changeHandler(e.target.name, e.target.value)}
                 name={"message"}
@@ -195,7 +196,8 @@ export default function ContactForm() {
                 InputLabelProps={{
                   style: {
                     color:
-                      formData.errors.filter((n: any) => n.errFull).length > 0
+                      formData.errors.filter((n: any) => n.errMessage).length >
+                      0
                         ? ""
                         : "white",
                   },
@@ -204,13 +206,15 @@ export default function ContactForm() {
                   bgcolor: "rgb(51,51,51)",
                   "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
                     borderColor:
-                      formData.errors.filter((n: any) => n.errFull).length > 0
+                      formData.errors.filter((n: any) => n.errMessage).length >
+                      0
                         ? "#f44336"
                         : "white",
                   },
                   "& .MuiInputLabel-root": {
                     color:
-                      formData.errors.filter((n: any) => n.errFull).length > 0
+                      formData.errors.filter((n: any) => n.errMessage).length >
+                      0
                         ? "#f44336"
                         : "white",
                   },
@@ -220,31 +224,47 @@ export default function ContactForm() {
                 }}
                 label={"Message*"}
               />
-                 {formData.errors.filter((n: any) => n.errMessage).length > 0 && (
-                <Alert className = "alerts" variant="outlined" severity="error">
-                  {formData.errors[3].errMessage}
+              {formData.errors.filter((n: any) => n.errMessage).length > 0 && (
+                <Alert className="alerts" variant="outlined" severity="error">
+                  {
+                    formData.errors.filter((n: any) => n.errMessage)[0]
+                      .errMessage
+                  }
                 </Alert>
               )}
             </span>
-            <Button
-              onClick={(e) => submitHandler(e)}
-              sx={{
-                bgcolor: "white",
-                color: "black",
-                fontFamily: "inherit",
-                paddingLeft: "2rem",
-                paddingRight: "2rem",
-                height: "3rem",
-                "&:hover": {
-                  bgcolor: "transparent",
-                  color: "white",
-                },
-              }}
-              id="button"
-              variant="contained"
-            >
-              Share Your Feedback
-            </Button>
+            { !formData.spinnerOn &&
+              <Button
+                onClick={(e) => submitHandler(e)}
+                sx={{
+                  bgcolor: "white",
+                  color: "black",
+                  fontFamily: "inherit",
+                  paddingLeft: "2rem",
+                  paddingRight: "2rem",
+                  marginBottom: "1rem",
+                  height: "3rem",
+                  "&:hover": {
+                    bgcolor: "transparent",
+                    color: "white",
+                  },
+                }}
+                id="button"
+                variant="contained"
+              >
+                Share Your Feedback
+              </Button>
+            }
+            {formData.spinnerOn && 
+            <LoadingButton
+            loading
+            loadingPosition="start"
+            startIcon={<SaveIcon />}
+            variant="outlined"
+          >
+            Save
+          </LoadingButton>
+            }
           </form>
           <div id="second-box">
             <div id="contact-us">Contact Me</div>

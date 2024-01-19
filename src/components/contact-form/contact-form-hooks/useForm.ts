@@ -1,6 +1,8 @@
-import { useState } from "react";
 import { FormStateType } from "../../../global-dto/g-dtos";
+import { FORMSPREE_ENDPOINT } from "../../../utils/formspree-utils";
 import { schema } from "../contact-form-utils/yup-schema-utils";
+import { useLocalStorage } from "./useLocalStorage";
+import axios from "axios";
 
 export const initialState: FormStateType = {
   category: "",
@@ -8,10 +10,11 @@ export const initialState: FormStateType = {
   email: "",
   message: "",
   errors: [],
+  spinnerOn: false,
 };
 
 export const useForm = (key: string, state: FormStateType): any[] => {
-  const [data, setData] = useState(state);
+  const [data, setData] = useLocalStorage(key, state);
 
   const formValidation = async () => {
     try {
@@ -19,23 +22,46 @@ export const useForm = (key: string, state: FormStateType): any[] => {
         abortEarly: false,
         stripUnknown: true,
       }); //eslint-disable
+      setData({ ...data, errors: [] });
       return true;
     } catch (err: any) {
       const errors: Record<string, string>[] = err.errors;
-      setData({...data, errors: errors});
-      }
+      setData({ ...data, errors: errors });
+      return false;
     }
+  };
 
   const changeHandler = (name: string, value: string) => {
     setData({ ...data, [name]: value });
   };
 
   const submitHandler = async (e: Event) => {
-    console.log(data);
     e.preventDefault();
+    setData({ ...data, spinnerOn: true });
     const result: boolean | undefined = await formValidation();
     if (result === true) {
-      console.log(data);
+      const { category, fullName, email, message } = data;
+      const payload: Record<string, string> = {
+        category,
+        fullName,
+        email,
+        message,
+      };
+      axios
+        .post(FORMSPREE_ENDPOINT, payload)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          setTimeout(() => {
+            setData({ ...data, spinnerOn: false });
+          }, 100);
+        });
+    } else {
+      setData({ ...data, spinnerOn: false });
     }
   };
   return [data, changeHandler, submitHandler, formValidation];

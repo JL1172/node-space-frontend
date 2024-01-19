@@ -33,4 +33,5 @@ export interface FormStateType {
   email: string;
   message: string;
   errors: Record<string | symbol, string>[];
+  spinnerOn: boolean;
 }
