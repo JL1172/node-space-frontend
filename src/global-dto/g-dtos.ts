@@ -32,9 +32,5 @@ export interface FormStateType {
   fullName: string;
   email: string;
   message: string;
-  disabled: boolean;
-  eCat: string;
-  eMessage: string;
-  eFull: string;
-  eEmail: string;
+  errors: Record<string | symbol, string>[];
 }

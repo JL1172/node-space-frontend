@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { StyledContactForm } from "../styles/StyledContactForm";
+import { StyledContactForm } from "../styles/contact-form/StyledContactForm";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "./contact-form/contact-form-themes/input-theme";
 import icon6 from "../global-imgs/icon6.png";
@@ -22,33 +21,27 @@ import {
 
 export default function ContactForm() {
   const nav = useNavigate();
-  const [formData, changeHandler, submitHandler, verifyFields] = useForm(
+  const [formData, changeHandler, submitHandler] = useForm(
     "Form_Data",
     initialState
   );
-  useEffect(() => {
-    verifyFields();
-  }, [verifyFields]);
 
   return (
     <StyledContactForm>
       <ThemeProvider theme={theme}>
-        <div id="form-wrapper">
-          <form onSubmit={(e) => submitHandler(e)}>
+        <div id="outer-wrapper">
+          <form id="first-box" onSubmit={(e) => e.preventDefault()}>
             <span
               onClick={() => {
                 window.localStorage.clear();
                 nav("/");
               }}
-              id="io-icon"
+              id="home-return-icon"
             >
               <IoReturnUpBackSharp />
               <div>Home</div>
             </span>
-            <FormControl
-              className="text-field-class"
-              sx={{ marginBottom: ".5rem" }}
-            >
+            <FormControl className="form-inputs select-input">
               <InputLabel
                 id="demo-simple-select-label"
                 sx={{
@@ -79,24 +72,25 @@ export default function ContactForm() {
               </Select>
             </FormControl>
             <TextField
+              className="form-inputs"
               onChange={(e) => changeHandler(e.target.name, e.target.value)}
               name={"fullName"}
               value={formData.fullName}
               inputProps={{ style: { color: "white" } }}
               InputLabelProps={{ style: { color: "white" } }}
               label={"Full Name"}
-              className="text-field-class-div"
             />
             <TextField
+              className="form-inputs"
               onChange={(e) => changeHandler(e.target.name, e.target.value)}
               name={"email"}
               value={formData.email}
               inputProps={{ style: { color: "white" } }}
               InputLabelProps={{ style: { color: "white" } }}
               label={"Email"}
-              className="text-field-class-div"
             />
             <TextField
+              className="form-inputs"
               onChange={(e) => changeHandler(e.target.name, e.target.value)}
               name={"message"}
               value={formData.message}
@@ -106,9 +100,9 @@ export default function ContactForm() {
               inputProps={{ style: { color: "white" } }}
               InputLabelProps={{ style: { color: "white" } }}
               label={"Message*"}
-              className="text-field-class-div"
             />
             <Button
+              onClick={(e) => submitHandler(e)}
               sx={{
                 bgcolor: "white",
                 color: "black",
@@ -123,13 +117,12 @@ export default function ContactForm() {
               }}
               id="button"
               variant="contained"
-              disabled={formData.disabled}
             >
               Share Your Feedback
             </Button>
           </form>
-          <div id="second-wrapper-cf">
-            <div className="h1-div-cf">Contact Us</div>
+          <div id="second-box">
+            <div id = "contact-us">Contact Me</div>
             <img src={icon6} alt="icon" />
           </div>
         </div>
