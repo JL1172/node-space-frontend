@@ -12,8 +12,8 @@ import {
 } from "redux";
 import { thunk } from "redux-thunk";
 import { rootReducer } from "./redux/reducers/root-reducers";
-import { Auth0Provider } from "@auth0/auth0-react";
-import { CLIENT_ID, DOMAIN, REDIRECT } from "./utils/auth0-utils";
+// import { Auth0Provider } from "@auth0/auth0-react";
+// import { CLIENT_ID, DOMAIN, REDIRECT } from "./utils/auth0-utils";
 
 declare global {
   interface Window {
@@ -28,15 +28,15 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <Auth0Provider
-    domain={DOMAIN}
-    clientId={CLIENT_ID}
-    authorizationParams={{
-      redirect_uri: REDIRECT,
-    }}
-    useRefreshTokens={true}
-    cacheLocation="memory"
-  >
+  // <Auth0Provider
+  //   domain={DOMAIN}
+  //   clientId={CLIENT_ID}
+  //   authorizationParams={{
+  //     redirect_uri: REDIRECT,
+  //   }}
+  //   useRefreshTokens={true}
+  //   cacheLocation="memory"
+  // >
     <Provider store={store}>
       <BrowserRouter>
         <React.StrictMode>
@@ -44,5 +44,5 @@ root.render(
         </React.StrictMode>
       </BrowserRouter>
     </Provider>
-  </Auth0Provider>
+  // </Auth0Provider>
 );

@@ -5,20 +5,20 @@ import {
   connectSocials,
   divCategories,
 } from "./landing-page-utils/footer-util";
-import { useAuth0 } from "@auth0/auth0-react";
+// import { useAuth0 } from "@auth0/auth0-react";
 import { GoDotFill } from "react-icons/go";
 
 function Footer() {
   const Login_State = "Login_State";
-  const { loginWithRedirect } = useAuth0();
+  // const { loginWithRedirect } = useAuth0();
   const advancedLogin = (content: string): void => {
-    if (/general/i.test(content)) {
-      if (window.localStorage.getItem(Login_State) === "true") {
-        loginWithRedirect({ authorizationParams: { prompt: "none" } });
-      } else {
-        loginWithRedirect({ authorizationParams: { prompt: "login" } });
-      }
-    }
+    // if (/general/i.test(content)) {
+    //   if (window.localStorage.getItem(Login_State) === "true") {
+    //     loginWithRedirect({ authorizationParams: { prompt: "none" } });
+    //   } else {
+    //     loginWithRedirect({ authorizationParams: { prompt: "login" } });
+    //   }
+    // }
   };
   return (
     <StyledFooter>

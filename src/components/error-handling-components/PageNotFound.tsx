@@ -1,4 +1,4 @@
-import { StyledNotFound } from "../styles/StyledNotFound";
+import { StyledNotFound } from "../../styles/StyledNotFound";
 
 export default function PageNotFound() {
   return (

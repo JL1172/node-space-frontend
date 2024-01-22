@@ -42,7 +42,7 @@ export const divCategories: DivCategoryFooterType[] = [
   {
     head: "General",
     cat_1: <Link to="contact-form">Contact Form</Link>,
-    cat_2: <Link to="admin/login/blog-form">Want To Write A Blog?</Link>,
+    cat_2: <Link to="creator/login">Want To Write A Blog?</Link>,
     cat_3: <Link to = "">Buy Me A Coffee</Link>,
     cat_4: undefined,
   },

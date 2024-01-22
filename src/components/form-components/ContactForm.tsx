@@ -1,10 +1,10 @@
-import { StyledContactForm } from "../styles/contact-form/StyledContactForm";
+import { StyledContactForm } from "../../styles/contact-form/StyledContactForm";
 import { ThemeProvider } from "@mui/material/styles";
 import {
   buttonSx,
   theme,
 } from "./contact-form/contact-form-themes/input-theme";
-import icon6 from "../global-imgs/icon6.png";
+import icon6 from "../../global-imgs/icon6.png";
 import { selectFieldContent } from "./contact-form/contact-form-utils/textfield-utils";
 import SaveIcon from "@mui/icons-material/Save";
 import CheckIcon from "@mui/icons-material/Check";
@@ -279,7 +279,7 @@ export default function ContactForm() {
               </LoadingButton>
             ) : !spinnerOn && successMessage ? (
               <Button variant="contained" sx={buttonSx}>
-                <CheckIcon sx={{marginRight: "1rem"}} />
+                <CheckIcon sx={{ marginRight: "1rem" }} />
                 Successfully Sent
               </Button>
             ) : (

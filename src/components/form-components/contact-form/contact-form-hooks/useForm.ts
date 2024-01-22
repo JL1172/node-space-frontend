@@ -1,5 +1,6 @@
-import { FormStateType } from "../../../global-dto/g-dtos";
-import { FORMSPREE_ENDPOINT } from "../../../utils/formspree-utils";
+
+import { FormStateType } from "../../../../global-dto/g-dtos";
+import { FORMSPREE_ENDPOINT } from "../../../../utils/formspree-utils";
 import { schema } from "../contact-form-utils/yup-schema-utils";
 import { useLocalStorage } from "./useLocalStorage";
 import axios from "axios";
