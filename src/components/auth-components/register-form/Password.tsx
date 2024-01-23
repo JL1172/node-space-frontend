@@ -1,15 +1,20 @@
 import { Alert, Button, TextField } from "@mui/material";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { RegisterContext } from "./register-form-context/RegisterContext";
 
 export default function PasswordInput() {
   const { formData, changeHandler, changePage, verifyPassword } =
     useContext(RegisterContext);
+    const [visibility,setVisibility] = useState(false);
+    const toggle = () => {
+        setVisibility(!visibility);
+    }
   return (
     <div className="text-field-wrapper">
       <div className="inner-text-field-wrapper">
         <TextField
           name="password"
+          type={visibility ? "text" : "password"}
           value={formData.password}
           onChange={(e) => changeHandler(e.target.name, e.target.value)}
           inputProps={{ style: { color: "white" } }}
@@ -47,6 +52,7 @@ export default function PasswordInput() {
             )}
           </Alert>
         )}
+        <span onClick={()=> toggle()} id = "toggle-pass">{!visibility ? "Show" : "Hide"}</span>
       </div>
       <Button
         onClick={() => changePage(2)}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ROLE, RegisterStateType } from "../../../../global-dto/g-dtos";
-import { registerEndpoint } from "../../../../api/auth-endpoint";
+import { loginEndpoint, registerEndpoint } from "../../../../api/auth-endpoint";
 
 export const initialState: RegisterStateType = {
   fname: "",
@@ -14,9 +14,15 @@ export const initialState: RegisterStateType = {
   passwordErrorMessage: [{ password: {} }],
   role: ROLE.USER,
   pageNumber: 0,
+  loginError: "",
+  registerSuccessMessage: "",
+  login_password: "",
+  login_username: "",
+  log_username_err: "",
+  log_password_err: "",
 };
 
-export const useForm = (state: any) => {
+export const useForm = (state: any, nav: any) => {
   const [formData, setFormData] = useState(state);
   const renderPage = (page: number) => {
     setFormData({ ...formData, pageNumber: page });
@@ -130,7 +136,25 @@ export const useForm = (state: any) => {
         role: formData.role,
       };
       const res = await registerEndpoint(finalPayload);
-      console.log(res);
+      setFormData({
+        ...formData,
+        login_password: formData.password,
+        login_username: formData.username,
+        username: "",
+        password: "",
+        fname: "",
+        lname: "",
+        email: "",
+        fullNameErrorMessage: [{ first_name: {} }, { last_name: {} }],
+        emailErrorMessage: [{ email: {} }],
+        usernameErrorMessage: [{ username: {} }],
+        passwordErrorMessage: [{ password: {} }],
+        role: ROLE.USER,
+        pageNumber: 0,
+        loginError: "",
+        registerSuccessMessage: res.data.message,
+      });
+      nav("/creator/login");
     } catch (err: any) {
       if (err.response && err.response.data.message) {
         if (err.response.data.message === "API Key Required") {
@@ -158,22 +182,22 @@ export const useForm = (state: any) => {
                 ...formData,
                 passwordErrorMessage: [{ password: {} }],
                 pageNumber: 1,
-                usernameErrorMessage: [{username: err.response.data.message}],
-                emailErrorMessage: [{email: err.response.data.message}],
+                usernameErrorMessage: [{ username: err.response.data.message }],
+                emailErrorMessage: [{ email: err.response.data.message }],
               });
             } else if (result[0] && !result[1]) {
               setFormData({
                 ...formData,
                 passwordErrorMessage: [{ password: {} }],
                 pageNumber: 2,
-                emailErrorMessage: [{email: err.response.data.message}],
+                emailErrorMessage: [{ email: err.response.data.message }],
               });
             } else if (!result[0] && result[1]) {
               setFormData({
                 ...formData,
                 passwordErrorMessage: [{ password: {} }],
                 pageNumber: 1,
-                usernameErrorMessage: [{username: err.response.data.message}],
+                usernameErrorMessage: [{ username: err.response.data.message }],
               });
             }
           } else {
@@ -182,7 +206,7 @@ export const useForm = (state: any) => {
               passwordErrorMessage: [{ password: {} }],
               pageNumber: 3,
             });
-            alert('successful');
+            alert("successful");
           }
         } else {
           const { password = "" } = err.response.data.message;
@@ -196,6 +220,51 @@ export const useForm = (state: any) => {
       }
     }
   };
+  const login = async () => {
+    try {
+      const res: any = await loginEndpoint({
+        username: formData.login_username,
+        password: formData.login_password,
+      });
+      const input = res.data.token;
+      const key = "token";
+      window.localStorage.setItem(key, JSON.stringify(input));
+      setFormData({ initialState });
+      nav("/creator/blog-form");
+    } catch (err: any) {
+      const usernameEmpty = err.response.data.message.username;
+      const passwordEmpty = err.response.data.message.password;
+      if (usernameEmpty && passwordEmpty) {
+        setFormData({
+          ...formData,
+          log_username_err: usernameEmpty.isNotEmpty,
+          log_password_err: passwordEmpty.isNotEmpty,
+          loginError: "",
+        });
+      } else if (passwordEmpty && !usernameEmpty) {
+        setFormData({
+          ...formData,
+          log_password_err: passwordEmpty.isNotEmpty,
+          log_username_err: "",
+          loginError: "",
+        });
+      } else if (!passwordEmpty && usernameEmpty) {
+        setFormData({
+          ...formData,
+          log_username_err: usernameEmpty.isNotEmpty,
+          log_password_err: "",
+          loginError: "",
+        });
+      } else {
+        setFormData({
+          ...formData,
+          log_username_err: "",
+          log_password_err: "",
+          loginError: err.response.data.message.response,
+        });
+      }
+    }
+  };
 
   return [
     formData,
@@ -205,5 +274,6 @@ export const useForm = (state: any) => {
     verifyUsername,
     verifyEmail,
     verifyPassword,
+    login,
   ];
 };

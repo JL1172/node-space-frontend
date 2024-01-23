@@ -73,12 +73,26 @@ export const StyledRegisterForm = styled.div`
     align-items: center;
     margin-top: 1rem;
     margin-bottom: 1rem;
+    position: relative;
   }
   .alerts {
     width: 100%;
     /* display: flex; */
     /* flex-direction: column; */
   }
+  #toggle-pass {
+    position: absolute;
+    right: 0;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+    &:hover {
+      color: royalblue;
+      text-decoration: underline;
+      transition: 100ms;
+    }
+  }
+
   @media screen and (max-width: 500px) {
     form {
       min-height: 100dvh;

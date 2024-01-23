@@ -5,7 +5,6 @@ import { RegisterContext } from "./register-form-context/RegisterContext";
 export default function EmailInput() {
   const { formData, changeHandler, changePage, verifyEmail } =
     useContext(RegisterContext);
-  console.log(formData.emailErrorMessage[0].email);
   return (
     <div className="text-field-wrapper">
       <div className="inner-text-field-wrapper">

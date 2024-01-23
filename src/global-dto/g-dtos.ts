@@ -49,6 +49,12 @@ export interface RegisterStateType {
   usernameErrorMessage: any[];
   passwordErrorMessage: any[];
   pageNumber: number;
+  loginError: string;
+  registerSuccessMessage: string;
+  login_username: string;
+  login_password: string;
+  log_username_err: string;
+  log_password_err: string;
 }
 
 export interface RegisterContextType {
