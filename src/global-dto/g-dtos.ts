@@ -3,7 +3,9 @@ import { ReactElement } from "react";
 export interface AppProps {
   fetch_endpoint: () => void;
 }
-
+export enum ROLE {
+  USER="USER",
+}
 export interface CategoryType {
   cat_type: string;
   cat_icon: ReactElement<any, any>;
@@ -33,4 +35,24 @@ export interface FormStateType {
   email: string;
   message: string;
   errors: Record<string | symbol, string>[];
+}
+
+export interface RegisterStateType {
+  fname: string;
+  lname: string;
+  email: string;
+  password: string;
+  username: string;
+  role: ROLE;
+  fullNameErrorMessage: string;
+  emailErrorMessage: string;
+  usernameErrorMessage: string;
+  passwordErrorMessage: string;
+  pageNumber: number;
+}
+
+export interface RegisterContextType {
+  formData: any;
+  changeHandler: any;
+  changePage: any;
 }

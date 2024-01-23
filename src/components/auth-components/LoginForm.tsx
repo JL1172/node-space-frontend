@@ -9,7 +9,7 @@ export default function LoginForm() {
       <ThemeProvider theme={theme}>
         <form>
           <GiAstronautHelmet id="astronaut" />
-          <div id="h1-div-header">Login To Creator's Portal For Node-Space</div>
+          <div id="h1-div-header">Login To Creator's Portal</div>
           <div id="input-wrapper">
             <TextField
               inputProps={{ style: { color: "white" } }}
@@ -47,7 +47,8 @@ export default function LoginForm() {
           >
             Login
           </Button>
-          <a href = "/creator/register">Register</a>
+          <span className="span-or-login">or</span>
+          <a className="alternate-auth-path" href = "/creator/register">Register</a>
         </form>
       </ThemeProvider>
     </StyledLoginForm>

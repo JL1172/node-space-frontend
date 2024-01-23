@@ -10,6 +10,7 @@ import PageNotFound from "./components/error-handling-components/PageNotFound";
 import BlogForm from "./components/form-components/BlogForm";
 import ContactForm from "./components/form-components/ContactForm";
 import LoginForm from "./components/auth-components/LoginForm";
+import RegisterForm from "./components/auth-components/RegisterForm";
 
 function App(props: AppProps) {
   useEffect(() => {
@@ -21,7 +22,7 @@ function App(props: AppProps) {
         <Route path="/" element={<LandingPage />} />
         <Route path="/creator/blog-form" element={<BlogForm />} />
         <Route path="/creator/login" element={<LoginForm />} />
-        <Route path="/creator/register" element={<LoginForm />} />
+        <Route path="/creator/register" element={<RegisterForm />} />
         <Route path="/contact-form" element={<ContactForm />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>

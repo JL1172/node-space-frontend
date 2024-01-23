@@ -1,16 +1,40 @@
-import { Button, TextField, ThemeProvider } from "@mui/material";
-import { StyledLoginForm } from "../../styles/login-form/StyledLoginForm";
+import { ThemeProvider } from "@mui/material";
 import { GiAstronautHelmet } from "react-icons/gi";
 import { theme } from "./login-form/login-form-themes/input-themes";
+import { StyledRegisterForm } from "../../styles/register-form/StyledRegisterForm";
+import FullNameInput from "./register-form/FullName";
+import {
+  initialState,
+  useForm,
+} from "./register-form/register-form-hooks/useForm";
+import { RegisterContext } from "./register-form/register-form-context/RegisterContext";
 
 export default function RegisterForm() {
+  const [formData, changeHandler, changePage, verifyFull] = useForm(initialState);
+
   return (
-    <StyledLoginForm>
-      <ThemeProvider theme={theme}>
-        <form>
-          <GiAstronautHelmet id="astronaut" />
-          <div id="h1-div-header">Login To Creator's Portal For Node-Space</div>
-          <div id="input-wrapper">
+    <StyledRegisterForm>
+      <RegisterContext.Provider value={{ formData, changeHandler, changePage, verifyFull }}>
+        <ThemeProvider theme={theme}>
+          <form>
+            <GiAstronautHelmet id="astronaut" />
+            <div id="h1-div-header">Register For A Creator's Account</div>
+            <div id="input-wrapper">
+              {formData.pageNumber === 0 && <FullNameInput />}
+              {/* <TextField
+              inputProps={{ style: { color: "white" } }}
+              InputLabelProps={{ style: { color: "white" } }}
+              label={"Last Name"}
+              // sx={{ width: "50%" }}
+              className="text-field-class"
+            />
+            <TextField
+              inputProps={{ style: { color: "white" } }}
+              InputLabelProps={{ style: { color: "white" } }}
+              label={"Email"}
+              // sx={{ width: "50%" }}
+              className="text-field-class"
+            />
             <TextField
               inputProps={{ style: { color: "white" } }}
               InputLabelProps={{ style: { color: "white" } }}
@@ -24,32 +48,15 @@ export default function RegisterForm() {
               label={"Password"}
               // sx={{ width: "50%" }}
               className="text-field-class"
-            />
-          </div>
-          <Button
-            sx={{
-              bgcolor: "white",
-              color: "black",
-              fontFamily: "inherit",
-              paddingLeft: "2rem",
-              paddingRight: "2rem",
-              marginBottom: "1rem",
-              marginTop: "2rem",
-              height: "3rem",
-              width: "50%",
-              "&:hover": {
-                bgcolor: "transparent",
-                color: "white",
-              },
-            }}
-            id="button"
-            variant="contained"
-          >
-            Login
-          </Button>
-          <a href = "/creator/register">Register</a>
-        </form>
-      </ThemeProvider>
-    </StyledLoginForm>
+            /> */}
+            </div>
+            <span className="span-or-login">or</span>
+            <a href="/creator/login" className="alternate-auth-path">
+              Login
+            </a>
+          </form>
+        </ThemeProvider>
+      </RegisterContext.Provider>
+    </StyledRegisterForm>
   );
 }
