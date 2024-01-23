@@ -87,6 +87,12 @@ export default function ContactForm() {
                   id="demo-simple-select"
                   label="Contact Category"
                   sx={{
+                    "& fieldset": {
+                      borderColor:
+                        formData.errors.filter((n: any) => n.errFull).length > 0
+                          ? "#f44336"
+                          : "white",
+                    },
                     color: "white",
                     "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
                       borderColor: "white",

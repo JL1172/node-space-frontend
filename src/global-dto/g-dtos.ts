@@ -4,7 +4,7 @@ export interface AppProps {
   fetch_endpoint: () => void;
 }
 export enum ROLE {
-  USER="USER",
+  USER = "USER",
 }
 export interface CategoryType {
   cat_type: string;
@@ -44,10 +44,10 @@ export interface RegisterStateType {
   password: string;
   username: string;
   role: ROLE;
-  fullNameErrorMessage: string;
-  emailErrorMessage: string;
-  usernameErrorMessage: string;
-  passwordErrorMessage: string;
+  fullNameErrorMessage: any[];
+  emailErrorMessage: any[];
+  usernameErrorMessage: any[];
+  passwordErrorMessage: any[];
   pageNumber: number;
 }
 

@@ -52,7 +52,7 @@ export const StyledRegisterForm = styled.div`
     margin-top: 1rem;
   }
   .text-field-class {
-    margin: 1rem;
+    width: 100%;
   }
   .alternate-auth-path {
     margin-top: 1rem;
@@ -65,6 +65,19 @@ export const StyledRegisterForm = styled.div`
     height: fit-content;
     justify-content: space-around;
     flex-direction: column;
+  }
+  .inner-text-field-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .alerts {
+    width: 100%;
+    /* display: flex; */
+    /* flex-direction: column; */
   }
   @media screen and (max-width: 500px) {
     form {
