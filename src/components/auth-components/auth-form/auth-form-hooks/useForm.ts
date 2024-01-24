@@ -237,6 +237,7 @@ export const useForm = (state: AuthStateType, nav: NavigateFunction) => {
       });
       const input: string = res.data.token;
       const key: string = "token";
+      window.localStorage.clear();
       window.localStorage.setItem(key, JSON.stringify(input));
       setFormData(initialState);
       nav("/creator/blog-form");

@@ -7,24 +7,17 @@ import ThirdSection from "./blog-form/ThirdSections";
 import FourthSection from "./blog-form/FourthSection";
 import FifthSection from "./blog-form/FifthSection";
 import { useEffect } from "react";
-// import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
 import { IoReturnUpBackSharp } from "react-icons/io5";
 
 export default function BlogForm() {
   const nav = useNavigate();
-  // const { isAuthenticated, isLoading, logout } = useAuth0();
   useEffect(() => {
-    // if (!isLoading && !isAuthenticated) {
-    //   nav("/");
-    // } else {
-    //   window.localStorage.setItem("Login_State", JSON.stringify(true));
-    // }
+
   }, []);
   const advancedLogout = () => {
     window.localStorage.clear();
     nav('/');
-    // logout();
   };
   return (
     <StyledBlogForm>

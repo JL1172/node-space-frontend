@@ -1,7 +1,11 @@
 import { ReactElement } from "react";
 
 export interface AppProps {
-  fetch_endpoint: () => void;
+  error: GlobalErrorType;
+}
+export interface JwtProps {
+  error: GlobalErrorType;
+  setJwtError: (data: string[]) => Record<string | symbol, any>;
 }
 export enum ROLE {
   USER = "USER",
@@ -37,7 +41,6 @@ export interface FormStateType {
   errors: Record<string | symbol, string>[];
 }
 
-
 export interface AuthStateType {
   fname: string;
   lname: string;
@@ -62,4 +65,8 @@ export interface RegisterContextType {
   formData: any;
   changeHandler: any;
   changePage: any;
+}
+
+export interface GlobalErrorType {
+  jwt_error: string;
 }

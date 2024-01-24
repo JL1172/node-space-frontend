@@ -1,13 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { RootState } from "./redux/reducers/root-reducers";
-import { fetch_endpoint } from "./redux/actions-creators/sanity";
 import { AppProps } from "./global-dto/g-dtos";
 import { StyledApp } from "./styles/StyledApp";
 import LandingPage from "./components/landing-page-components/LandingPage";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import PageNotFound from "./components/error-handling-components/PageNotFound";
-import BlogForm from "./components/form-components/BlogForm";
 import ContactForm from "./components/form-components/ContactForm";
 import LoginForm from "./components/auth-components/LoginForm";
 import RegisterForm from "./components/auth-components/RegisterForm";
@@ -16,6 +14,7 @@ import {
   initialState,
   useForm,
 } from "./components/auth-components/auth-form/auth-form-hooks/useForm";
+import ProtectedRoute from "./components/protected-components/ProtectedRoute";
 
 function App(props: AppProps) {
   const nav = useNavigate();
@@ -45,7 +44,7 @@ function App(props: AppProps) {
       >
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/creator/blog-form" element={<BlogForm />} />
+          <Route path="/creator/blog-form" element={<ProtectedRoute />} />
           <Route path="/creator/login" element={<LoginForm />} />
           <Route path="/creator/register" element={<RegisterForm />} />
           <Route path="/contact-form" element={<ContactForm />} />
@@ -57,7 +56,7 @@ function App(props: AppProps) {
 }
 const mapStateToProps = (state: RootState) => {
   return {
-    landing_page: state.sanity,
+    error: state.globalError,
   };
 };
-export default connect(mapStateToProps, { fetch_endpoint })(App);
+export default connect(mapStateToProps, {  })(App);

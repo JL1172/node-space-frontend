@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import { sanity } from "./landing-page";
+import { globalErrReducer } from "./global-error-reducer";
 
 export const rootReducer = combineReducers({
-    sanity
-})
+  globalError: globalErrReducer,
+});
 
-export type RootState = ReturnType<typeof rootReducer>
+export type RootState = ReturnType<typeof rootReducer>;
