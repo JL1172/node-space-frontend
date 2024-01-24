@@ -37,7 +37,7 @@ export interface FormStateType {
   errors: Record<string | symbol, string>[];
 }
 
-export interface RegisterStateType {
+export interface AuthStateType {
   fname: string;
   lname: string;
   email: string;

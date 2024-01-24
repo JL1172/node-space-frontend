@@ -1,22 +1,16 @@
 import { Alert, Button, TextField, ThemeProvider } from "@mui/material";
 import { StyledLoginForm } from "../../styles/login-form/StyledLoginForm";
 import { GiAstronautHelmet } from "react-icons/gi";
-import { theme } from "./login-form/login-form-themes/input-themes";
 import { useContext, useState } from "react";
-import { RegisterContext } from "./register-form/register-form-context/RegisterContext";
+import { AuthContext } from "./auth-form/auth-form-context/AuthContext";
+import { theme } from "../form-components/blog-form/blog-form-themes/input-theme";
 
 export default function LoginForm() {
-  const { formData, changeHandler, login } = useContext(RegisterContext);
+  const { formData, changeHandler, login } = useContext(AuthContext);
   const [visibility, setVisibility] = useState(false);
   const toggle = () => {
     setVisibility(!visibility);
   };
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     console.log("timeout ran");
-  //     changeHandler("registerSuccessMessage", "");
-  //   }, 2000);
-  // }, []); //eslint-disable-line
   return (
     <StyledLoginForm>
       {formData.registerSuccessMessage && (

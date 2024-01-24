@@ -1,36 +1,31 @@
 import { Alert, Button, TextField } from "@mui/material";
-import { useContext, useState } from "react";
-import { RegisterContext } from "./register-form-context/RegisterContext";
+import { useContext } from "react";
+import { AuthContext } from "./auth-form-context/AuthContext";
 
-export default function PasswordInput() {
-  const { formData, changeHandler, changePage, verifyPassword } =
-    useContext(RegisterContext);
-    const [visibility,setVisibility] = useState(false);
-    const toggle = () => {
-        setVisibility(!visibility);
-    }
+export default function UsernameInput() {
+  const { formData, changeHandler, changePage, verifyUsername } =
+    useContext(AuthContext);
   return (
     <div className="text-field-wrapper">
       <div className="inner-text-field-wrapper">
         <TextField
-          name="password"
-          type={visibility ? "text" : "password"}
-          value={formData.password}
+          name="username"
+          value={formData.username}
           onChange={(e) => changeHandler(e.target.name, e.target.value)}
           inputProps={{ style: { color: "white" } }}
           InputLabelProps={{ style: { color: "white" } }}
-          label={"Password"}
+          label={"Username"}
           sx={{
             "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
               borderColor:
-                Object.keys(formData.passwordErrorMessage[0].password).length >
+                Object.keys(formData.usernameErrorMessage[0].username).length >
                 0
                   ? "#f44336"
                   : "white",
             },
             "& .MuiInputLabel-root": {
               color:
-                Object.keys(formData.passwordErrorMessage[0].password).length >
+                Object.keys(formData.usernameErrorMessage[0].username).length >
                 0
                   ? "#f44336"
                   : "white",
@@ -42,20 +37,21 @@ export default function PasswordInput() {
           // sx={{ width: "50%" }}
           className="text-field-class"
         />
-        {Object.keys(formData.passwordErrorMessage[0].password).length >
-          0 && (
+         {Object.keys(formData.usernameErrorMessage[0].username).length > 0 && (
           <Alert className="alerts" variant="outlined" severity="error">
-            {Object.values(formData.passwordErrorMessage[0].password).map(
-              (n: any, i: number) => {
-                return <div key={i}>{n}</div>;
-              }
-            )}
+            {typeof formData.usernameErrorMessage[0].username !== "string" &&
+              Object.values(formData.usernameErrorMessage[0].username).map(
+                (n: any, i: number) => {
+                  return <div key={i}>{n}</div>;
+                }
+              )}
+            {typeof formData.usernameErrorMessage[0].username === "string" &&
+              formData.usernameErrorMessage[0].username}
           </Alert>
         )}
-        <span onClick={()=> toggle()} id = "toggle-pass">{!visibility ? "Show" : "Hide"}</span>
       </div>
       <Button
-        onClick={() => changePage(2)}
+        onClick={() => changePage(0)}
         sx={{
           bgcolor: "white",
           color: "black",
@@ -76,7 +72,7 @@ export default function PasswordInput() {
         Back
       </Button>
       <Button
-        onClick={() => verifyPassword()}
+        onClick={() => verifyUsername()}
         sx={{
           bgcolor: "white",
           color: "black",
@@ -94,7 +90,7 @@ export default function PasswordInput() {
         className="text-field-class"
         variant="contained"
       >
-        Register User
+        Next
       </Button>
     </div>
   );

@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { ROLE, RegisterStateType } from "../../../../global-dto/g-dtos";
+import { ROLE, AuthStateType } from "../../../../global-dto/g-dtos";
 import { loginEndpoint, registerEndpoint } from "../../../../api/auth-endpoint";
+import { AxiosResponse } from "axios";
+import { NavigateFunction } from "react-router-dom";
 
-export const initialState: RegisterStateType = {
+export const initialState: AuthStateType = {
   fname: "",
   lname: "",
   email: "",
@@ -22,7 +24,7 @@ export const initialState: RegisterStateType = {
   log_password_err: "",
 };
 
-export const useForm = (state: any, nav: any) => {
+export const useForm = (state: AuthStateType, nav: NavigateFunction) => {
   const [formData, setFormData] = useState(state);
   const renderPage = (page: number) => {
     setFormData({ ...formData, pageNumber: page });
@@ -31,14 +33,14 @@ export const useForm = (state: any, nav: any) => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const verifyFull = async () => {
+  const verifyFull = async (): Promise<void> => {
     try {
       const payload: { first_name: string; last_name: string } = {
         first_name: formData.fname,
         last_name: formData.lname,
       };
       await registerEndpoint(payload);
-    } catch (err: any) {
+    } catch (err: any | unknown) {
       if (err.response && err.response.data.message) {
         if (err.response.data.message === "API Key Required") {
           alert(err.response.data.message);
@@ -67,7 +69,7 @@ export const useForm = (state: any, nav: any) => {
       }
     }
   };
-  const verifyUsername = async () => {
+  const verifyUsername = async (): Promise<void> => {
     try {
       const payload: { username: string } = {
         username: formData.username,
@@ -96,13 +98,13 @@ export const useForm = (state: any, nav: any) => {
       }
     }
   };
-  const verifyEmail = async () => {
+  const verifyEmail = async (): Promise<void> => {
     try {
       const payload: { email: string } = {
         email: formData.email,
       };
       await registerEndpoint(payload);
-    } catch (err: any) {
+    } catch (err: any | unknown) {
       if (err.response && err.response.data.message) {
         if (err.response.data.message === "API Key Required") {
           alert(err.response.data.message);
@@ -125,9 +127,16 @@ export const useForm = (state: any, nav: any) => {
       }
     }
   };
-  const verifyPassword = async () => {
+  const verifyPassword = async (): Promise<void> => {
     try {
-      const finalPayload = {
+      const finalPayload: {
+        first_name: string;
+        last_name: string;
+        email: string;
+        username: string;
+        password: string;
+        role: ROLE.USER;
+      } = {
         first_name: formData.fname,
         last_name: formData.lname,
         email: formData.email,
@@ -135,7 +144,7 @@ export const useForm = (state: any, nav: any) => {
         password: formData.password,
         role: formData.role,
       };
-      const res = await registerEndpoint(finalPayload);
+      const res: AxiosResponse = await registerEndpoint(finalPayload);
       setFormData({
         ...formData,
         login_password: formData.password,
@@ -155,7 +164,7 @@ export const useForm = (state: any, nav: any) => {
         registerSuccessMessage: res.data.message,
       });
       nav("/creator/login");
-    } catch (err: any) {
+    } catch (err: any | unknown) {
       if (err.response && err.response.data.message) {
         if (err.response.data.message === "API Key Required") {
           alert(err.response.data.message);
@@ -220,20 +229,22 @@ export const useForm = (state: any, nav: any) => {
       }
     }
   };
-  const login = async () => {
+  const login = async (): Promise<void> => {
     try {
-      const res: any = await loginEndpoint({
+      const res: AxiosResponse = await loginEndpoint({
         username: formData.login_username,
         password: formData.login_password,
       });
-      const input = res.data.token;
-      const key = "token";
+      const input: string = res.data.token;
+      const key: string = "token";
       window.localStorage.setItem(key, JSON.stringify(input));
-      setFormData({ initialState });
+      setFormData(initialState);
       nav("/creator/blog-form");
-    } catch (err: any) {
-      const usernameEmpty = err.response.data.message.username;
-      const passwordEmpty = err.response.data.message.password;
+    } catch (err: any | unknown) {
+      const usernameEmpty: Record<string, string> =
+        err.response.data.message.username;
+      const passwordEmpty: Record<string, string> =
+        err.response.data.message.password;
       if (usernameEmpty && passwordEmpty) {
         setFormData({
           ...formData,
@@ -241,26 +252,30 @@ export const useForm = (state: any, nav: any) => {
           log_password_err: passwordEmpty.isNotEmpty,
           loginError: "",
         });
-      } else if (passwordEmpty && !usernameEmpty) {
+      }
+      if (passwordEmpty && !usernameEmpty) {
         setFormData({
           ...formData,
           log_password_err: passwordEmpty.isNotEmpty,
           log_username_err: "",
           loginError: "",
         });
-      } else if (!passwordEmpty && usernameEmpty) {
+      }
+      if (!passwordEmpty && usernameEmpty) {
         setFormData({
           ...formData,
           log_username_err: usernameEmpty.isNotEmpty,
           log_password_err: "",
           loginError: "",
         });
-      } else {
+      }
+      if (!passwordEmpty && !usernameEmpty) {
         setFormData({
           ...formData,
           log_username_err: "",
           log_password_err: "",
-          loginError: err.response.data.message.response,
+          loginError:
+            err.response.data.message.response || err.response.data.message,
         });
       }
     }

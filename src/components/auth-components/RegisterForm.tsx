@@ -1,19 +1,19 @@
 import { ThemeProvider } from "@mui/material";
 import { GiAstronautHelmet } from "react-icons/gi";
-import { theme } from "./login-form/login-form-themes/input-themes";
 import { StyledRegisterForm } from "../../styles/register-form/StyledRegisterForm";
-import FullNameInput from "./register-form/FullName";
-import UsernameInput from "./register-form/Username";
-import EmailInput from "./register-form/Email";
-import PasswordInput from "./register-form/Password";
+import FullNameInput from "./auth-form/FullName";
+import UsernameInput from "./auth-form/Username";
+import EmailInput from "./auth-form/Email";
+import PasswordInput from "./auth-form/Password";
 import { useContext } from "react";
-import { RegisterContext } from "./register-form/register-form-context/RegisterContext";
+import { AuthContext } from "./auth-form/auth-form-context/AuthContext";
 import { Link } from "react-router-dom";
+import { theme } from "../form-components/blog-form/blog-form-themes/input-theme";
 
 export default function RegisterForm() {
   const {
     formData,
-  } = useContext(RegisterContext);
+  } = useContext(AuthContext);
   return (
     <StyledRegisterForm>
       <ThemeProvider theme={theme}>

@@ -11,11 +11,11 @@ import BlogForm from "./components/form-components/BlogForm";
 import ContactForm from "./components/form-components/ContactForm";
 import LoginForm from "./components/auth-components/LoginForm";
 import RegisterForm from "./components/auth-components/RegisterForm";
-import { RegisterContext } from "./components/auth-components/register-form/register-form-context/RegisterContext";
+import { AuthContext } from "./components/auth-components/auth-form/auth-form-context/AuthContext";
 import {
   initialState,
   useForm,
-} from "./components/auth-components/register-form/register-form-hooks/useForm";
+} from "./components/auth-components/auth-form/auth-form-hooks/useForm";
 
 function App(props: AppProps) {
   const nav = useNavigate();
@@ -31,7 +31,7 @@ function App(props: AppProps) {
   ] = useForm(initialState, nav);
   return (
     <StyledApp>
-      <RegisterContext.Provider
+      <AuthContext.Provider
         value={{
           formData,
           changeHandler,
@@ -51,7 +51,7 @@ function App(props: AppProps) {
           <Route path="/contact-form" element={<ContactForm />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
-      </RegisterContext.Provider>
+      </AuthContext.Provider>
     </StyledApp>
   );
 }

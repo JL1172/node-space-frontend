@@ -1,9 +1,9 @@
 import { Alert, Button, TextField } from "@mui/material";
 import { useContext } from "react";
-import { RegisterContext } from "./register-form-context/RegisterContext";
+import { AuthContext } from "./auth-form-context/AuthContext";
 
 export default function FullNameInput() {
-  const { formData, changeHandler, verifyFull } = useContext(RegisterContext);
+  const { formData, changeHandler, verifyFull } = useContext(AuthContext);
   return (
     <div className="text-field-wrapper">
       <div className="inner-text-field-wrapper">
