@@ -27,7 +27,8 @@ export const initialState: AuthStateType = {
 export const useForm = (
   state: AuthStateType,
   nav: NavigateFunction,
-  setLoadingState: Function
+  setLoadingState: Function,
+  setSuccessMessage: Function
 ) => {
   const [formData, setFormData] = useState(state);
   const renderPage = (page: number) => {
@@ -166,8 +167,9 @@ export const useForm = (
         role: ROLE.USER,
         pageNumber: 0,
         loginError: "",
-        registerSuccessMessage: res.data.message,
+        registerSuccessMessage: "",
       });
+      setSuccessMessage(res.data.message);
       setLoadingState(false);
       nav("/creator/login");
     } catch (err: any | unknown) {
@@ -236,7 +238,7 @@ export const useForm = (
       setLoadingState(false);
     } finally {
       setTimeout(() => {
-        setFormData({ ...formData, registerSuccessMessage: "" });
+        setSuccessMessage("");
       }, 5000);
     }
   };
@@ -249,7 +251,7 @@ export const useForm = (
       });
       const input: string = res.data.token;
       window.localStorage.clear();
-      window.localStorage.setItem('token', JSON.stringify(input));
+      window.localStorage.setItem("token", JSON.stringify(input));
       setFormData(initialState);
       setLoadingState(false);
       nav("/creator/blog-form");

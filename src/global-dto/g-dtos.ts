@@ -4,6 +4,7 @@ export interface AppProps {
   authState: GlobalAuthType;
   setLoadingState: Function;
   initiateLogout: Function;
+  setSuccessMessage: Function;
 }
 export interface JwtProps {
   authState: GlobalAuthType;
@@ -81,4 +82,6 @@ export interface GlobalAuthType {
   jwt_error: string;
   authentication_state: boolean | string;
   loading_state: boolean;
+  success_message: string;
+  creator_info: Record<string | symbol, any>[];
 }

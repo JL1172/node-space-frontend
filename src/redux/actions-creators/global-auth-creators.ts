@@ -3,6 +3,7 @@ import {
   SET_LOADING_STATE,
   SET_AUTH_STATE,
   SET_CREATOR_STATE,
+  SET_SUCCESS_MESSAGE,
 } from "../action-types/global-auth-types";
 import { authorizeEndpoint, logoutEndpoint } from "../../api/auth-endpoint";
 
@@ -46,6 +47,9 @@ const setCreatorState = (data: { username: string; email: string }) => {
 const setJwtError = (data: string) => {
   //eslint-disable-line
   return { type: SET_JWT_ERROR, payload: data };
+};
+export const setSuccessMessage = (data: string) => {
+  return { type: SET_SUCCESS_MESSAGE, payload: data };
 };
 
 export const setLoadingState = (bool: boolean) => {

@@ -17,6 +17,7 @@ import ProtectedRoute from "./components/protected-components/ProtectedRoute";
 import {
   initiateLogout,
   setLoadingState,
+  setSuccessMessage,
 } from "./redux/actions-creators/global-auth-creators";
 import { useEffect } from "react";
 import { Alert } from "@mui/material";
@@ -33,7 +34,12 @@ function App(props: AppProps) {
     verifyEmail,
     verifyPassword,
     login,
-  ] = useForm(initialState, nav, props.setLoadingState);
+  ] = useForm(
+    initialState,
+    nav,
+    props.setLoadingState,
+    props.setSuccessMessage
+  );
   useEffect(() => {
     const handleBeforeUnload = async (e: Event) => {
       e.preventDefault();
@@ -80,6 +86,8 @@ const mapStateToProps = (state: RootState) => {
     authState: state.globalAuth,
   };
 };
-export default connect(mapStateToProps, { setLoadingState, initiateLogout })(
-  App
-);
+export default connect(mapStateToProps, {
+  setLoadingState,
+  initiateLogout,
+  setSuccessMessage,
+})(App);

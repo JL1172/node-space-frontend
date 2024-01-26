@@ -18,14 +18,13 @@ function LoginForm(props: RegisterProps) {
   const toggle = () => {
     setVisibility(!visibility);
   };
-
   return props.authState.loading_state ? (
     <SpinnerLoader />
   ) : (
     <StyledLoginForm>
-      {formData.registerSuccessMessage && (
-        <Alert id="success-message" variant="outlined" severity="success">
-          {formData.registerSuccessMessage}
+      {props.authState.success_message && (
+        <Alert id="success-message" severity="success">
+          {props.authState.success_message}
         </Alert>
       )}
       <ThemeProvider theme={theme}>
