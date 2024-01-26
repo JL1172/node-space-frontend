@@ -1,3 +1,3 @@
 import { createContext } from "react";
 
-export const FormStateContext = createContext(null);
+export const FormStateContext = createContext<any>(undefined);

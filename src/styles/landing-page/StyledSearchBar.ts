@@ -109,7 +109,7 @@ export const StyledSearchBar = styled.div`
 
   }
   #button {
-    width: 95%;
+    width: 100%;
     margin: 0;
   }
 }

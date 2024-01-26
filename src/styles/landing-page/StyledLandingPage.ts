@@ -18,4 +18,9 @@ export const StyledLandingPage = styled.div`
     padding-left: 5dvw;
     padding-top: 3dvw;
   }
+  @media screen and (max-width: 500px) {
+    .none {
+      display: none;
+    }
+  }
 `;

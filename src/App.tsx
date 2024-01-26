@@ -41,16 +41,16 @@ function App(props: AppProps) {
     props.setSuccessMessage
   );
   useEffect(() => {
-    const handleBeforeUnload = async (e: Event) => {
-      e.preventDefault();
-      await initiateLogout();
-      localStorage.clear();
-    };
-    window.addEventListener("beforeunload", handleBeforeUnload);
+    // const handleBeforeUnload = async (e: Event) => {
+    //   e.preventDefault();
+    //   await initiateLogout();
+    //   localStorage.clear();
+    // };
+    // window.addEventListener("beforeunload", handleBeforeUnload);
 
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
+    // return () => {
+    //   window.removeEventListener("beforeunload", handleBeforeUnload);
+    // };
   }, [initiateLogout]);
   return (
     <StyledApp>

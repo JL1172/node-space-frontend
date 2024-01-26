@@ -1,6 +1,9 @@
 import { Button } from "@mui/material";
+import { FormStateContext } from "./blog-form-contexts/FormStateContext";
+import { useContext } from "react";
 
 export default function FifthSection() {
+  const {formData, changeHandler} = useContext(FormStateContext);
   return (
     <div id = "blog-upload">
       <Button

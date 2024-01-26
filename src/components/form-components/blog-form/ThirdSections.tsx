@@ -1,6 +1,9 @@
 import { Alert, TextField } from "@mui/material";
+import { FormStateContext } from "./blog-form-contexts/FormStateContext";
+import { useContext } from "react";
 
 export default function ThirdSection() {
+  const {formData, changeHandler} = useContext(FormStateContext);
   return (
     <div className="paragraph-div">
       <div className="h4-div">Write Your Blog</div>
@@ -9,6 +12,9 @@ export default function ThirdSection() {
         InputLabelProps={{ style: { color: "white" } }}
         id="outlined-multiline-static"
         className="text-field-class"
+        name="intro"
+        value={formData.intro}
+        onChange={(e)=> changeHandler(e.target.name,e.target.value)}
         sx={{
           // width: "50%",
           backgroundColor: "rgb(51,51,51)",
@@ -22,6 +28,9 @@ export default function ThirdSection() {
         inputProps={{ style: { color: "white" } }}
         InputLabelProps={{ style: { color: "white" } }}
         id="outlined-multiline-static"
+        name="body"
+        value={formData.body}
+        onChange={(e)=> changeHandler(e.target.name,e.target.value)}
         sx={{
           marginTop: "2rem",
           // width: "50%",
@@ -36,6 +45,9 @@ export default function ThirdSection() {
         inputProps={{ style: { color: "white" } }}
         InputLabelProps={{ style: { color: "white" } }}
         id="outlined-multiline-static"
+        name="outro"
+        value={formData.outro}
+        onChange={(e)=> changeHandler(e.target.name,e.target.value)}
         sx={{
           marginTop: "2rem",
           // width: "50%",
@@ -50,6 +62,9 @@ export default function ThirdSection() {
         InputLabelProps={{ style: { color: "white" } }}
         className="text-field-class"
         id="outlined-multiline-static"
+        name="summary"
+        value={formData.summary}
+        onChange={(e)=> changeHandler(e.target.name,e.target.value)}
         sx={{
           marginTop: "2rem",
           marginBottom: "2rem",

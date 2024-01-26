@@ -85,3 +85,16 @@ export interface GlobalAuthType {
   success_message: string;
   creator_info: Record<string | symbol, any>[];
 }
+
+export interface BlogFormType {
+  blog_title: string;
+  author_name: string;
+  blog_category: string;
+  keywords: string[];
+  intro: string;
+  body: string;
+  outro: string;
+  summary: string;
+  featuredMedia: string;
+  extraMedia: string[];
+}

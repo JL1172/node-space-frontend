@@ -12,11 +12,13 @@ import Autocomplete from "@mui/material/Autocomplete";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import Checkbox from "@mui/material/Checkbox";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import { FormStateContext } from "./blog-form-contexts/FormStateContext";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 export default function SecondSection() {
+  const {formData, changeHandler} = React.useContext(FormStateContext);
   return (
     <div className="first-part-div">
       <div className="h4-div">
