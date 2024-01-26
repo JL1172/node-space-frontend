@@ -79,6 +79,16 @@ export const StyledLoginForm = styled.div`
     margin-bottom: 1rem;
     position: relative;
   }
+  .link-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .home {
+    color: gray !important;
+    display: flex;
+    align-items: center;
+  }
   .alerts {
     width: 100%;
     /* display: flex; */
@@ -99,6 +109,8 @@ export const StyledLoginForm = styled.div`
 
   @media screen and (max-width: 500px) {
     form {
+      margin: 0;
+      border-radius: 0;
       min-height: 100dvh;
       height: fit-content;
     }

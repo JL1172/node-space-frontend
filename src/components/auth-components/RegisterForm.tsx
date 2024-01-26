@@ -9,12 +9,18 @@ import { useContext } from "react";
 import { AuthContext } from "./auth-form/auth-form-context/AuthContext";
 import { Link } from "react-router-dom";
 import { theme } from "../form-components/blog-form/blog-form-themes/input-theme";
+import SpinnerLoader from "../protected-components/Spinner";
+import { RegisterProps } from "../../global-dto/g-dtos";
+import { connect } from "react-redux";
+import { setLoadingState } from "../../redux/actions-creators/global-auth-creators";
+import { RootState } from "../../redux/reducers/root-reducers";
+import { MdHomeFilled } from "react-icons/md";
 
-export default function RegisterForm() {
-  const {
-    formData,
-  } = useContext(AuthContext);
-  return (
+function RegisterForm(props: RegisterProps) {
+  const { formData } = useContext(AuthContext);
+  return props.authState.loading_state ? (
+    <SpinnerLoader />
+  ) : (
     <StyledRegisterForm>
       <ThemeProvider theme={theme}>
         <form onSubmit={(e) => e.preventDefault()}>
@@ -27,11 +33,23 @@ export default function RegisterForm() {
             {formData.pageNumber === 3 && <PasswordInput />}
           </div>
           <span className="span-or-login">or</span>
-          <Link to = "/creator/login" className="alternate-auth-path">
-            Login
-          </Link>
+          <div className="link-wrapper">
+            <Link to="/creator/login" className="alternate-auth-path">
+              Login
+            </Link>
+            <Link to="/" className="alternate-auth-path home">
+            <MdHomeFilled />
+              Home
+            </Link>
+          </div>
         </form>
       </ThemeProvider>
     </StyledRegisterForm>
   );
 }
+const mapStateToProps = (state: RootState) => {
+  return {
+    authState: state.globalAuth,
+  };
+};
+export default connect(mapStateToProps, { setLoadingState })(RegisterForm);

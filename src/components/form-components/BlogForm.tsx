@@ -9,34 +9,42 @@ import FifthSection from "./blog-form/FifthSection";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoReturnUpBackSharp } from "react-icons/io5";
+import { connect } from "react-redux";
+import { initiateLogout } from "../../redux/actions-creators/global-auth-creators";
+import { RootState } from "../../redux/reducers/root-reducers";
+import { BlogFormProps } from "../../global-dto/g-dtos";
 
-export default function BlogForm() {
+function BlogForm(props: BlogFormProps) {
   const nav = useNavigate();
-  useEffect(() => {
-
-  }, []);
-  const advancedLogout = () => {
-    window.localStorage.clear();
-    nav('/');
+  useEffect(() => {}, []);
+  const advancedLogout = async() => {
+    props.initiateLogout();
+    nav("/");
   };
   return (
     <StyledBlogForm>
-        <form>
-          <div id="h1-div" className="spec-h1-div">
-            <span onClick={() => advancedLogout()} id="io-icon">
-              <IoReturnUpBackSharp />
-              <div>Return</div>
-            </span>{" "}
-            Create Blog Form
-          </div>
-          <ThemeProvider theme={theme}>
-            <FirstSection />
-            <SecondSection />
-            <ThirdSection />
-            <FourthSection />
-            <FifthSection />
-          </ThemeProvider>
-        </form>
+      <form>
+        <div id="h1-div" className="spec-h1-div">
+          <span onClick={() => advancedLogout()} id="io-icon">
+            <IoReturnUpBackSharp />
+            <div>Return</div>
+          </span>
+          Create Blog Form
+        </div>
+        <ThemeProvider theme={theme}>
+          <FirstSection />
+          <SecondSection />
+          <ThirdSection />
+          <FourthSection />
+          <FifthSection />
+        </ThemeProvider>
+      </form>
     </StyledBlogForm>
   );
 }
+const mapStateToProps = (state: RootState) => {
+  return {
+    authState: state.globalAuth,
+  };
+};
+export default connect(mapStateToProps, { initiateLogout })(BlogForm);

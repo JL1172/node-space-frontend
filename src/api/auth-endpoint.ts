@@ -8,20 +8,28 @@ const axiosInstance: AxiosInstance = axios.create({
 export const registerEndpoint = (
   payload: any
 ): Promise<AxiosResponse<any, any>> => {
-  return axiosInstance
-    .post(`${AUTH_BASE_URL}/api/auth/register`, payload);
+  return axiosInstance.post(`${AUTH_BASE_URL}/api/auth/register`, payload);
 };
 
 export const loginEndpoint = (payload: {
   username: string;
   password: string;
 }): Promise<AxiosResponse<any, any>> => {
-  return axiosInstance
-    .post(`${AUTH_BASE_URL}/api/auth/login`, payload);
+  return axiosInstance.post(`${AUTH_BASE_URL}/api/auth/login`, payload);
 };
 
-export const authorizeEndpoint = (): Promise<AxiosResponse<any, any>> => {
-  const token = window.localStorage.getItem('token');
-  axiosInstance.defaults.headers.Authorization = token ? JSON.parse(token) : '';
+export const authorizeEndpoint = (): Promise<AxiosResponse<any, any>> | any => {
+  const token = window.localStorage.getItem("token");
+  axiosInstance.defaults.headers["Authorization"] = token
+    ? JSON.parse(token)
+    : "";
   return axiosInstance.get(`${AUTH_BASE_URL}/api/auth/restricted-check`);
+};
+
+export const logoutEndpoint = (): Promise<AxiosResponse<any, any>> => {
+  const token = window.localStorage.getItem("token");
+  axiosInstance.defaults.headers["Authorization"] = token
+    ? JSON.parse(token)
+    : "";
+  return axiosInstance.get(`${AUTH_BASE_URL}/api/auth/logout`);
 };

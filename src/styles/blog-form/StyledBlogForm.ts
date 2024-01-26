@@ -187,26 +187,30 @@ export const StyledBlogForm = styled.div`
     } */
   }
   @media screen and (max-width: 490px) {
-form {
-  width: 97%;
-  border: 0;
-  border-top: 1px solid rgb(51, 51, 51);
-  border-bottom: 1px solid rgb(51, 51, 51);
-}
     #io-icon {
-      position: sticky;
-      background-color: rgb(21, 21, 21);
-      border: 1px solid rgb(51, 51, 51);
+      position: fixed;
+      left: 0;
+      width: 100% !important;
+      border: 1px solid rgb(51,51,51);
+      top: 5px;
+      background-color: rgb(21,21,21);
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      width: 10%;
       z-index: 5;
-      width: 90%;
-      justify-content: center;
-      height: 2rem;
-      margin-bottom: 1rem;
-      margin-top: 1rem;
-      div {
-        margin-left: 1rem;
-      }
+      transition: 100ms ease-in-out;
+      cursor: pointer;
+      border-radius: 10rem;
     }
+
+    form {
+      width: 100%;
+      border: 0;
+      border-top: 1px solid rgb(51, 51, 51);
+      border-bottom: 1px solid rgb(51, 51, 51);
+    }
+
     .paragraph-div {
       justify-content: space-around;
       width: 96%;

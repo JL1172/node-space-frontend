@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import { globalErrReducer } from "./global-error-reducer";
+import { globalAuthReducer } from "./global-auth-reducer";
 
 export const rootReducer = combineReducers({
-  globalError: globalErrReducer,
+  globalAuth: globalAuthReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

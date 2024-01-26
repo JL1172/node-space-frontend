@@ -80,6 +80,16 @@ export const StyledRegisterForm = styled.div`
     /* display: flex; */
     /* flex-direction: column; */
   }
+  .link-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .home {
+    color: gray !important;
+    display: flex;
+    align-items: center;
+  }
   #toggle-pass {
     position: absolute;
     right: 0;
@@ -97,6 +107,8 @@ export const StyledRegisterForm = styled.div`
     form {
       min-height: 100dvh;
       height: fit-content;
+      margin: 0;
+      border-radius: 0;
     }
   }
 `;

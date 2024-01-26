@@ -4,14 +4,24 @@ import { GiAstronautHelmet } from "react-icons/gi";
 import { useContext, useState } from "react";
 import { AuthContext } from "./auth-form/auth-form-context/AuthContext";
 import { theme } from "../form-components/blog-form/blog-form-themes/input-theme";
+import { connect } from "react-redux";
+import { RootState } from "../../redux/reducers/root-reducers";
+import { RegisterProps } from "../../global-dto/g-dtos";
+import { setLoadingState } from "../../redux/actions-creators/global-auth-creators";
+import SpinnerLoader from "../protected-components/Spinner";
+import { Link } from "react-router-dom";
+import { MdHomeFilled } from "react-icons/md";
 
-export default function LoginForm() {
+function LoginForm(props: RegisterProps) {
   const { formData, changeHandler, login } = useContext(AuthContext);
   const [visibility, setVisibility] = useState(false);
   const toggle = () => {
     setVisibility(!visibility);
   };
-  return (
+
+  return props.authState.loading_state ? (
+    <SpinnerLoader />
+  ) : (
     <StyledLoginForm>
       {formData.registerSuccessMessage && (
         <Alert id="success-message" variant="outlined" severity="success">
@@ -122,11 +132,23 @@ export default function LoginForm() {
             </div>
           </div>
           <span className="span-or-login">or</span>
-          <a className="alternate-auth-path" href="/creator/register">
-            Register
-          </a>
+          <div className="link-wrapper">
+            <Link className="alternate-auth-path" to="/creator/register">
+              Register
+            </Link>
+            <Link to="/" className="alternate-auth-path home">
+              <MdHomeFilled />
+              Home
+            </Link>
+          </div>
         </form>
       </ThemeProvider>
     </StyledLoginForm>
   );
 }
+const mapStateToProps = (state: RootState) => {
+  return {
+    authState: state.globalAuth,
+  };
+};
+export default connect(mapStateToProps, { setLoadingState })(LoginForm);

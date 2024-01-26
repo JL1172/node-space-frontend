@@ -1,4 +1,3 @@
-import React from "react";
 import { connect } from "react-redux";
 import { RootState } from "./redux/reducers/root-reducers";
 import { AppProps } from "./global-dto/g-dtos";
@@ -15,8 +14,15 @@ import {
   useForm,
 } from "./components/auth-components/auth-form/auth-form-hooks/useForm";
 import ProtectedRoute from "./components/protected-components/ProtectedRoute";
+import {
+  initiateLogout,
+  setLoadingState,
+} from "./redux/actions-creators/global-auth-creators";
+import { useEffect } from "react";
+import { Alert } from "@mui/material";
 
 function App(props: AppProps) {
+  const { initiateLogout } = props;
   const nav = useNavigate();
   const [
     formData,
@@ -27,9 +33,24 @@ function App(props: AppProps) {
     verifyEmail,
     verifyPassword,
     login,
-  ] = useForm(initialState, nav);
+  ] = useForm(initialState, nav, props.setLoadingState);
+  useEffect(() => {
+    const handleBeforeUnload = async (e: Event) => {
+      e.preventDefault();
+      await initiateLogout();
+      localStorage.clear();
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [initiateLogout]);
   return (
     <StyledApp>
+      {props.authState.jwt_error && (
+        <Alert severity="error">{props.authState.jwt_error}.</Alert>
+      )}
       <AuthContext.Provider
         value={{
           formData,
@@ -56,7 +77,9 @@ function App(props: AppProps) {
 }
 const mapStateToProps = (state: RootState) => {
   return {
-    error: state.globalError,
+    authState: state.globalAuth,
   };
 };
-export default connect(mapStateToProps, {  })(App);
+export default connect(mapStateToProps, { setLoadingState, initiateLogout })(
+  App
+);

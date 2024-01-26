@@ -1,11 +1,21 @@
 import { ReactElement } from "react";
 
 export interface AppProps {
-  error: GlobalErrorType;
+  authState: GlobalAuthType;
+  setLoadingState: Function;
+  initiateLogout: Function;
 }
 export interface JwtProps {
-  error: GlobalErrorType;
-  setJwtError: (data: string[]) => Record<string | symbol, any>;
+  authState: GlobalAuthType;
+  fetchAuthenticationData: () => void;
+}
+export interface RegisterProps {
+  authState: GlobalAuthType;
+  setLoadingState: Function;
+}
+export interface BlogFormProps {
+  authState: GlobalAuthType;
+  initiateLogout: Function;
 }
 export enum ROLE {
   USER = "USER",
@@ -67,6 +77,8 @@ export interface RegisterContextType {
   changePage: any;
 }
 
-export interface GlobalErrorType {
+export interface GlobalAuthType {
   jwt_error: string;
+  authentication_state: boolean | string;
+  loading_state: boolean;
 }

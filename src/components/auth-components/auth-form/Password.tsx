@@ -1,8 +1,12 @@
 import { Alert, Button, TextField } from "@mui/material";
 import { useContext, useState } from "react";
 import { AuthContext } from "./auth-form-context/AuthContext";
+import { connect } from "react-redux";
+import { RegisterProps } from "../../../global-dto/g-dtos";
+import { RootState } from "../../../redux/reducers/root-reducers";
+import { setLoadingState } from "../../../redux/actions-creators/global-auth-creators";
 
-export default function PasswordInput() {
+function PasswordInput(props:RegisterProps) {
   const { formData, changeHandler, changePage, verifyPassword } =
     useContext(AuthContext);
     const [visibility,setVisibility] = useState(false);
@@ -99,3 +103,9 @@ export default function PasswordInput() {
     </div>
   );
 }
+const mapStateToProps = (state:RootState) => {
+  return {
+    authState: state.globalAuth,
+  }
+}
+export default connect(mapStateToProps, {setLoadingState})(PasswordInput)

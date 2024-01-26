@@ -24,7 +24,11 @@ export const initialState: AuthStateType = {
   log_password_err: "",
 };
 
-export const useForm = (state: AuthStateType, nav: NavigateFunction) => {
+export const useForm = (
+  state: AuthStateType,
+  nav: NavigateFunction,
+  setLoadingState: Function
+) => {
   const [formData, setFormData] = useState(state);
   const renderPage = (page: number) => {
     setFormData({ ...formData, pageNumber: page });
@@ -129,6 +133,7 @@ export const useForm = (state: AuthStateType, nav: NavigateFunction) => {
   };
   const verifyPassword = async (): Promise<void> => {
     try {
+      setLoadingState(true);
       const finalPayload: {
         first_name: string;
         last_name: string;
@@ -163,6 +168,7 @@ export const useForm = (state: AuthStateType, nav: NavigateFunction) => {
         loginError: "",
         registerSuccessMessage: res.data.message,
       });
+      setLoadingState(false);
       nav("/creator/login");
     } catch (err: any | unknown) {
       if (err.response && err.response.data.message) {
@@ -227,21 +233,30 @@ export const useForm = (state: AuthStateType, nav: NavigateFunction) => {
       } else {
         alert(`${err.message} Reload Page`);
       }
+      setLoadingState(false);
+    } finally {
+      setTimeout(() => {
+        setFormData({ ...formData, registerSuccessMessage: "" });
+      }, 5000);
     }
   };
   const login = async (): Promise<void> => {
     try {
-      const res: AxiosResponse = await loginEndpoint({
+      setLoadingState(true);
+      const res: any = await loginEndpoint({
         username: formData.login_username,
         password: formData.login_password,
       });
       const input: string = res.data.token;
-      const key: string = "token";
       window.localStorage.clear();
-      window.localStorage.setItem(key, JSON.stringify(input));
+      window.localStorage.setItem('token', JSON.stringify(input));
       setFormData(initialState);
+      setLoadingState(false);
       nav("/creator/blog-form");
     } catch (err: any | unknown) {
+      if (err.response.data.message === "API Key Required") {
+        alert(err.response.data.message);
+      }
       const usernameEmpty: Record<string, string> =
         err.response.data.message.username;
       const passwordEmpty: Record<string, string> =
@@ -279,6 +294,7 @@ export const useForm = (state: AuthStateType, nav: NavigateFunction) => {
             err.response.data.message.response || err.response.data.message,
         });
       }
+      setLoadingState(false);
     }
   };
 
