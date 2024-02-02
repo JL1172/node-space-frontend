@@ -24,8 +24,8 @@ export default function FirstSection() {
         inputProps={{ style: { color: "white" } }}
         InputLabelProps={{ style: { color: "white" } }}
         label="Author Name"
-        name="author_name"
-        value={formData.author_name}
+        name="blog_author_name"
+        value={formData.blog_author_name}
         onChange={(e)=> changeHandler(e.target.name,e.target.value)}
         // sx={{ width: "50%" }}
         className="text-field-class"

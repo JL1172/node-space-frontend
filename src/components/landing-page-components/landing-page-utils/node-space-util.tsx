@@ -37,7 +37,7 @@ export const description_modules: NodeSpaceDescriptionType[] = [
       ),
       p2: (
         <>
-          In my journey, I encountered a sentiment shared by a fellow developer
+          <br />In my journey, I encountered a sentiment shared by a fellow developer
           that Node doesn't receive the attention it truly deserves. This
           perception is not a critique of frameworks or libraries; rather, it
           underscores the untapped potential within Node itself. Delving into
@@ -48,7 +48,7 @@ export const description_modules: NodeSpaceDescriptionType[] = [
       ),
       p3: (
         <>
-          As I explored modules like <span className="spn">[Crypto]</span> and{" "}
+          <br />As I explored modules like <span className="spn">[Crypto]</span> and
           <span className="spn">[Child Process]</span>, my understanding of Node
           deepened, making me a more proficient developer. Node-space aims to
           bridge the gap, unveiling the compelling features of Node's modules and

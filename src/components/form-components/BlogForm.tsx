@@ -15,19 +15,29 @@ import { RootState } from "../../redux/reducers/root-reducers";
 import { BlogFormProps } from "../../global-dto/g-dtos";
 import { FormStateContext } from "./blog-form/blog-form-contexts/FormStateContext";
 import { initialState, useForm } from "./blog-form/blog-form-hooks/useForm";
+import { initCategoryFetch } from "../../redux/actions-creators/blog-form-creators";
+import { Alert } from "@mui/material";
 
 function BlogForm(props: BlogFormProps) {
   const nav = useNavigate();
-  useEffect(() => {}, []);
+  const { initCategoryFetch } = props;
+  useEffect(() => {
+    initCategoryFetch();
+  }, [initCategoryFetch]);
   const advancedLogout = async () => {
     props.initiateLogout();
     nav("/");
   };
-  const [formData, changeHandler] = useForm("blog_form_data", initialState);
+  const [formData, changeHandler] = useForm("blog_form_data", initialState, props.blogState);
 
   return (
     <StyledBlogForm>
-      <FormStateContext.Provider value={{ formData, changeHandler }}>
+      {props.authState.jwt_error && (
+        <Alert severity="error">{props.blogState.category_fetch_err}.</Alert>
+      )}
+      <FormStateContext.Provider
+        value={{ formData, changeHandler, blogState: props.blogState }}
+      >
         <form>
           <div id="h1-div" className="spec-h1-div">
             <span onClick={() => advancedLogout()} id="io-icon">
@@ -51,6 +61,9 @@ function BlogForm(props: BlogFormProps) {
 const mapStateToProps = (state: RootState) => {
   return {
     authState: state.globalAuth,
+    blogState: state.blogForm,
   };
 };
-export default connect(mapStateToProps, { initiateLogout })(BlogForm);
+export default connect(mapStateToProps, { initiateLogout, initCategoryFetch })(
+  BlogForm
+);

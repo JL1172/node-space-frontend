@@ -174,7 +174,10 @@ export const useForm = (
       nav("/creator/login");
     } catch (err: any | unknown) {
       if (err.response && err.response.data.message) {
-        if (err.response.data.message === "API Key Required") {
+        if (
+          err.response.data.message === "API Key Required" ||
+          err.response.data.message === "Forbidden."
+        ) {
           alert(err.response.data.message);
         }
         if (!err.response.data.message.password) {
@@ -251,12 +254,12 @@ export const useForm = (
       });
       const input: string = res.data.token;
       window.localStorage.clear();
-      window.localStorage.setItem("token", JSON.stringify(input));
+      window.localStorage.setItem("token", input);
       setFormData(initialState);
       setLoadingState(false);
       nav("/creator/blog-form");
     } catch (err: any | unknown) {
-      if (err.response.data.message === "API Key Required") {
+      if (err.response.data.message === "API Key Required" || err.response.data.message === 'Forbidden.') {
         alert(err.response.data.message);
       }
       const usernameEmpty: Record<string, string> =

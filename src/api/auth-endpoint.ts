@@ -20,16 +20,12 @@ export const loginEndpoint = (payload: {
 
 export const authorizeEndpoint = (): Promise<AxiosResponse<any, any>> | any => {
   const token = window.localStorage.getItem("token");
-  axiosInstance.defaults.headers["Authorization"] = token
-    ? JSON.parse(token)
-    : "";
+  axiosInstance.defaults.headers["Authorization"] = token || "";
   return axiosInstance.get(`${AUTH_BASE_URL}/api/auth/restricted-check`);
 };
 
 export const logoutEndpoint = (): Promise<AxiosResponse<any, any>> => {
   const token = window.localStorage.getItem("token");
-  axiosInstance.defaults.headers["Authorization"] = token
-    ? JSON.parse(token)
-    : "";
+  axiosInstance.defaults.headers["Authorization"] = token || "";
   return axiosInstance.get(`${AUTH_BASE_URL}/api/auth/logout`);
 };

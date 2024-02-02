@@ -14,7 +14,11 @@ export const fetchAuthenticationData = () => async (dispatch: any) => {
     dispatch(setCreatorState(res.data.payload));
     dispatch(setAuthenticationState(res.data.authorized));
   } catch (err: any) {
-    if (err.response.data.message === "API Key Required") {
+    if (
+      err.response.data.message === "API Key Required" ||
+      err.response.data.message === "Forbidden." ||
+      "Too Many Requests"
+    ) {
       dispatch(setJwtError(err.response.data.message));
     } else {
       dispatch(setJwtError(err.response.data.message.error[1]));

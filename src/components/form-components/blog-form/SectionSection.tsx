@@ -16,15 +16,27 @@ import { FormStateContext } from "./blog-form-contexts/FormStateContext";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
-
+//TODO THIS WHOLE PAGE NEEDS TO BE CONTROLLED ON INPUT LEVEL
 export default function SecondSection() {
-  const {formData, changeHandler} = React.useContext(FormStateContext);
+  const [options, setOptions] = React.useState([]);
+  const { formData, changeHandler, blogState } =
+    React.useContext(FormStateContext);
+  const { blog_category } = formData;
+  React.useEffect(() => {
+    const data = blogState.categories.filter((n: any) => {
+      return blog_category && Number(blog_category) === n.id;
+    });
+    if (data.length > 0) {
+      setOptions(data[0].SubCategory);
+    }
+  }, [blog_category, blogState.categories]);
+  console.log(formData);
   return (
     <div className="first-part-div">
       <div className="h4-div">
         Second, Choose Which Category And Keywords Best Represent This Blog
       </div>
-      <FormControl className="text-field-class" sx={{  marginBottom: ".5rem" }}>
+      <FormControl className="text-field-class" sx={{ marginBottom: ".5rem" }}>
         <InputLabel
           id="demo-simple-select-label"
           sx={{
@@ -39,16 +51,23 @@ export default function SecondSection() {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
+          name="blog_category"
+          value={formData.blog_category}
           label="Blog Category"
           sx={selectStyle}
+          onChange={(e) => changeHandler(e.target.name, e.target.value)}
         >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          {blogState.categories.map((n: any) => {
+            return (
+              <MenuItem key={n.id} value={n.id}>
+                {n.category_description}
+              </MenuItem>
+            );
+          })}
         </Select>
       </FormControl>
       <Autocomplete
-      limitTags={5}
+        limitTags={5}
         sx={{
           backgroundColor: "rgb(51, 51, 51)",
           color: "white",
@@ -72,9 +91,9 @@ export default function SecondSection() {
         }}
         multiple
         id="checkboxes-tags-demo"
-        options={top100Films}
+        options={options}
         disableCloseOnSelect
-        getOptionLabel={(option) => option.title}
+        getOptionLabel={(option: any) => option.sub_category_name || ""}
         renderOption={(props, option, { selected }) => (
           <li {...props}>
             <Checkbox
@@ -82,8 +101,10 @@ export default function SecondSection() {
               checkedIcon={checkedIcon}
               style={{ marginRight: 8 }}
               checked={selected}
+              // TODO
+              // onChange={(e)=>changeHandler('sub_categories',option.id)}
             />
-            {option.title}
+            {option.sub_category_name}
           </li>
         )}
         className="text-field-class"
@@ -92,6 +113,11 @@ export default function SecondSection() {
           <TextField
             {...params}
             label="KeyWords/Tags"
+            //TODO
+            // disabled={true}
+            value={formData.sub_search}
+            name="sub_search"
+            onChange={(e) => changeHandler(e.target.name, e.target.value)}
             placeholder=""
             InputLabelProps={{ style: { color: "white" } }}
             sx={{
@@ -128,40 +154,4 @@ export default function SecondSection() {
     </div>
   );
 }
-const top100Films = [
-  { title: "The Shawshank Redemption", year: 1994 },
-  { title: "The Godfather", year: 1972 },
-  { title: "The Godfather: Part II", year: 1974 },
-  { title: "The Dark Knight", year: 2008 },
-  { title: "12 Angry Men", year: 1957 },
-  { title: "Schindler's List", year: 1993 },
-  { title: "Pulp Fiction", year: 1994 },
-  {
-    title: "The Lord of the Rings: The Return of the King",
-    year: 2003,
-  },
-  { title: "The Good, the Bad and the Ugly", year: 1966 },
-  { title: "Fight Club", year: 1999 },
-  {
-    title: "The Lord of the Rings: The Fellowship of the Ring",
-    year: 2001,
-  },
-  {
-    title: "Star Wars: Episode V - The Empire Strikes Back",
-    year: 1980,
-  },
-  { title: "Forrest Gump", year: 1994 },
-  { title: "Inception", year: 2010 },
-  {
-    title: "The Lord of the Rings: The Two Towers",
-    year: 2002,
-  },
-  { title: "One Flew Over the Cuckoo's Nest", year: 1975 },
-  { title: "Goodfellas", year: 1990 },
-  { title: "The Matrix", year: 1999 },
-  { title: "Seven Samurai", year: 1954 },
-  {
-    title: "Star Wars: Episode IV - A New Hope",
-    year: 1977,
-  },
-];
+

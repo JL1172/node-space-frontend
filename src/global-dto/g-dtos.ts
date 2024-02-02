@@ -17,6 +17,8 @@ export interface RegisterProps {
 export interface BlogFormProps {
   authState: GlobalAuthType;
   initiateLogout: Function;
+  blogState: BlogFormState;
+  initCategoryFetch: Function;
 }
 export enum ROLE {
   USER = "USER",
@@ -88,13 +90,18 @@ export interface GlobalAuthType {
 
 export interface BlogFormType {
   blog_title: string;
-  author_name: string;
+  blog_author_name: string;
   blog_category: string;
-  keywords: string[];
-  intro: string;
-  body: string;
-  outro: string;
-  summary: string;
-  featuredMedia: string;
-  extraMedia: string[];
+  sub_categories: string[];
+  blog_intro: string;
+  blog_body: string;
+  blog_outro: string;
+  blog_summary: string;
+  files: string[];
+  sub_search: string;
+}
+
+export interface BlogFormState {
+  category_fetch_err: string;
+  categories: Record<string, any>[];
 }
