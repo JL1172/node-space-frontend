@@ -3,10 +3,11 @@ import { FormStateContext } from "./blog-form-contexts/FormStateContext";
 import { useContext } from "react";
 
 export default function FifthSection() {
-  const {formData, changeHandler} = useContext(FormStateContext);
+  const { handleSubmission } = useContext(FormStateContext);
   return (
-    <div id = "blog-upload">
+    <div id="blog-upload">
       <Button
+        onClick={(e) => handleSubmission(e)}
         sx={{
           bgcolor: "white",
           color: "black",
@@ -18,7 +19,7 @@ export default function FifthSection() {
           width: "100%",
           "&:hover": {
             bgcolor: "transparent",
-            color: "white"
+            color: "white",
           },
         }}
         id="button"

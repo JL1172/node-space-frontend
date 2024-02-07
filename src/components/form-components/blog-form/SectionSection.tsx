@@ -16,7 +16,6 @@ import { FormStateContext } from "./blog-form-contexts/FormStateContext";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
-//TODO THIS WHOLE PAGE NEEDS TO BE CONTROLLED ON INPUT LEVEL
 export default function SecondSection() {
   const [options, setOptions] = React.useState([]);
   const { formData, changeHandler, blogState } =
@@ -30,7 +29,6 @@ export default function SecondSection() {
       setOptions(data[0].SubCategory);
     }
   }, [blog_category, blogState.categories]);
-  console.log(formData);
   return (
     <div className="first-part-div">
       <div className="h4-div">
@@ -55,7 +53,9 @@ export default function SecondSection() {
           value={formData.blog_category}
           label="Blog Category"
           sx={selectStyle}
-          onChange={(e) => changeHandler(e.target.name, e.target.value)}
+          onChange={(e) => {
+            changeHandler(e.target.name, e.target.value);
+          }}
         >
           {blogState.categories.map((n: any) => {
             return (
@@ -68,6 +68,9 @@ export default function SecondSection() {
       </FormControl>
       <Autocomplete
         limitTags={5}
+        // disableClearable
+        isOptionEqualToValue={(option, value)=> option.id === value.id}
+        value={formData.sub_categories}
         sx={{
           backgroundColor: "rgb(51, 51, 51)",
           color: "white",
@@ -89,52 +92,55 @@ export default function SecondSection() {
             color: "white",
           },
         }}
+        onChange={(event: any, newValue, reason: any) => {
+          event.preventDefault();
+          changeHandler("sub_categories", newValue);
+        }}
         multiple
         id="checkboxes-tags-demo"
         options={options}
         disableCloseOnSelect
         getOptionLabel={(option: any) => option.sub_category_name || ""}
-        renderOption={(props, option, { selected }) => (
-          <li {...props}>
+        renderOption={(props, option: any, { selected }) => (
+          <li {...props} value={option.id}>
             <Checkbox
+              value={option.id}
               icon={icon}
               checkedIcon={checkedIcon}
               style={{ marginRight: 8 }}
               checked={selected}
-              // TODO
-              // onChange={(e)=>changeHandler('sub_categories',option.id)}
             />
             {option.sub_category_name}
           </li>
         )}
         className="text-field-class"
         // style={{ width: "50%" }}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="KeyWords/Tags"
-            //TODO
-            // disabled={true}
-            value={formData.sub_search}
-            name="sub_search"
-            onChange={(e) => changeHandler(e.target.name, e.target.value)}
-            placeholder=""
-            InputLabelProps={{ style: { color: "white" } }}
-            sx={{
-              backgroundColor: "rgb(51, 51, 51)",
-              "& .MuiAutocomplete-input": {
-                color: "white", // Set the text color for chosen options
-              },
-              "& .MuiChip-root": {
-                backgroundColor: "rgb(21,21,21)", // Set the background color for chosen options
-                color: "white", // Set the text color for chosen options
-                "& .MuiChip-deleteIcon": {
-                  color: "white", // Set the delete (remove) icon color for chosen options
+        renderInput={(params) => {
+          return (
+            <TextField
+              className="crying"
+              {...params}
+              value={params}
+              label="KeyWords/Tags"
+              // disabled={true}
+              placeholder=""
+              InputLabelProps={{ style: { color: "white" } }}
+              sx={{
+                backgroundColor: "rgb(51, 51, 51)",
+                "& .MuiAutocomplete-input": {
+                  color: "white", // Set the text color for chosen options
                 },
-              },
-            }}
-          />
-        )}
+                "& .MuiChip-root": {
+                  backgroundColor: "rgb(21,21,21)", // Set the background color for chosen options
+                  color: "white", // Set the text color for chosen options
+                  "& .MuiChip-deleteIcon": {
+                    color: "white", // Set the delete (remove) icon color for chosen options
+                  },
+                },
+              }}
+            />
+          );
+        }}
       />
       <div id="last-first-div">
         <Alert
@@ -154,4 +160,3 @@ export default function SecondSection() {
     </div>
   );
 }
-

@@ -19,6 +19,7 @@ export interface BlogFormProps {
   initiateLogout: Function;
   blogState: BlogFormState;
   initCategoryFetch: Function;
+  set_blog_fetch_status: Function;
 }
 export enum ROLE {
   USER = "USER",
@@ -90,18 +91,30 @@ export interface GlobalAuthType {
 
 export interface BlogFormType {
   blog_title: string;
+  read_only_sc: string;
   blog_author_name: string;
   blog_category: string;
-  sub_categories: string[];
+  sub_categories: any[];
   blog_intro: string;
   blog_body: string;
   blog_outro: string;
   blog_summary: string;
   files: string[];
-  sub_search: string;
 }
 
 export interface BlogFormState {
   category_fetch_err: string;
   categories: Record<string, any>[];
+  blog_fetch_status: boolean;
+}
+
+export interface FinalBlogPayloadType {
+  blog_title: string;
+  blog_intro: string;
+  blog_body: string;
+  blog_outro: string;
+  blog_summary: string;
+  blog_author_name: string;
+  category_id: number;
+  sub_categories: number[];
 }

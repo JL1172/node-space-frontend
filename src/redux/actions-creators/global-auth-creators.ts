@@ -17,7 +17,7 @@ export const fetchAuthenticationData = () => async (dispatch: any) => {
     if (
       err.response.data.message === "API Key Required" ||
       err.response.data.message === "Forbidden." ||
-      "Too Many Requests"
+      err.response.data.message === "Too Many Requests"
     ) {
       dispatch(setJwtError(err.response.data.message));
     } else {

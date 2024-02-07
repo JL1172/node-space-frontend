@@ -15,8 +15,9 @@ import { RootState } from "../../redux/reducers/root-reducers";
 import { BlogFormProps } from "../../global-dto/g-dtos";
 import { FormStateContext } from "./blog-form/blog-form-contexts/FormStateContext";
 import { initialState, useForm } from "./blog-form/blog-form-hooks/useForm";
-import { initCategoryFetch } from "../../redux/actions-creators/blog-form-creators";
+import { initCategoryFetch, set_blog_fetch_status } from "../../redux/actions-creators/blog-form-creators";
 import { Alert } from "@mui/material";
+import SpinnerLoader from "../protected-components/Spinner";
 
 function BlogForm(props: BlogFormProps) {
   const nav = useNavigate();
@@ -28,33 +29,42 @@ function BlogForm(props: BlogFormProps) {
     props.initiateLogout();
     nav("/");
   };
-  const [formData, changeHandler] = useForm("blog_form_data", initialState, props.blogState);
+  const [formData, changeHandler, handleSubmission] = useForm(
+    "blog_form_data",
+    initialState,
+    props.blogState,
+    props.set_blog_fetch_status
+  );
 
   return (
     <StyledBlogForm>
       {props.authState.jwt_error && (
         <Alert severity="error">{props.blogState.category_fetch_err}.</Alert>
       )}
-      <FormStateContext.Provider
-        value={{ formData, changeHandler, blogState: props.blogState }}
-      >
-        <form>
-          <div id="h1-div" className="spec-h1-div">
-            <span onClick={() => advancedLogout()} id="io-icon">
-              <IoReturnUpBackSharp />
-              <div>Return</div>
-            </span>
-            Create Blog Form
-          </div>
-          <ThemeProvider theme={theme}>
-            <FirstSection />
-            <SecondSection />
-            <ThirdSection />
-            <FourthSection />
-            <FifthSection />
-          </ThemeProvider>
-        </form>
-      </FormStateContext.Provider>
+      {props.blogState.blog_fetch_status ? (
+        <SpinnerLoader />
+      ) : (
+        <FormStateContext.Provider
+          value={{ formData, changeHandler, blogState: props.blogState, handleSubmission }}
+        >
+          <form>
+            <div id="h1-div" className="spec-h1-div">
+              <span onClick={() => advancedLogout()} id="io-icon">
+                <IoReturnUpBackSharp />
+                <div>Return</div>
+              </span>
+              Create Blog Form
+            </div>
+            <ThemeProvider theme={theme}>
+              <FirstSection />
+              <SecondSection />
+              <ThirdSection />
+              <FourthSection />
+              <FifthSection />
+            </ThemeProvider>
+          </form>
+        </FormStateContext.Provider>
+      )}
     </StyledBlogForm>
   );
 }
@@ -64,6 +74,7 @@ const mapStateToProps = (state: RootState) => {
     blogState: state.blogForm,
   };
 };
-export default connect(mapStateToProps, { initiateLogout, initCategoryFetch })(
-  BlogForm
-);
+export default connect(mapStateToProps, {
+  initiateLogout,
+  initCategoryFetch, set_blog_fetch_status
+})(BlogForm);

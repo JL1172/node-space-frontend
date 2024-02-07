@@ -101,6 +101,7 @@ export const StyledBlogForm = styled.div`
     justify-content: space-evenly;
     align-items: center;
     min-height: 25dvh;
+    text-align: center;
     height: fit-content;
     .h4-div {
       width: 50%;
@@ -110,8 +111,8 @@ export const StyledBlogForm = styled.div`
     #upload-div {
       width: 50%;
       display: flex;
-      flex-direction: column;
-      justify-content: space-evenly;
+      justify-content: center;
+      align-items: center;
       min-height: 23dvh;
       height: fit-content;
       border-bottom: 1px solid rgb(51, 51, 51);
@@ -125,6 +126,10 @@ export const StyledBlogForm = styled.div`
     width: 50%;
     margin: 10px;
   }
+  .buttons-class {
+    width: 30%;
+  }
+  
   @media screen and (max-width: 1000px) {
     #paragraph-alert {
       width: 99%;

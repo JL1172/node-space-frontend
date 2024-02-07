@@ -5,7 +5,7 @@ import { FormStateContext } from "./blog-form-contexts/FormStateContext";
 import { useContext } from "react";
 
 export default function FourthSection() {
-  const {formData, changeHandler} = useContext(FormStateContext);
+  const { changeHandler } = useContext(FormStateContext);
   return (
     <div className="media-div">
       <div className="h4-div">
@@ -13,24 +13,19 @@ export default function FourthSection() {
       </div>
       <div id="upload-div">
         <Button
-          // sx={{ width: "50%"}}
-          className="text-field-class buttons-class"
-          component="label"
-          variant="contained"
-          startIcon={<CloudUploadIcon />}
-        >
-          Featured Media
-          <VisuallyHiddenInput type="file" />
-        </Button>
-        <Button
-          // sx={{ width: "50%" }}
           className="text-field-class buttons-class"
           component="label"
           variant="contained"
           startIcon={<CloudUploadIcon />}
         >
           Attachments/Media
-          <VisuallyHiddenInput type="file" multiple />
+          <VisuallyHiddenInput
+            onChange={(e) => {
+              changeHandler("files", e.target.files);
+            }}
+            type="file"
+            multiple
+          />
         </Button>
       </div>
     </div>

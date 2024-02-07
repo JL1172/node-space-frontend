@@ -1,5 +1,7 @@
-import { getCategories } from "../../api/blog-endpoint";
+import { addBlogPtOne, getCategories } from "../../api/blog-endpoint";
+import { FinalBlogPayloadType } from "../../global-dto/g-dtos";
 import {
+  SET_BLOG_FETCH_STATUS,
   SET_CATEGORY_DATA,
   SET_FETCH_CATEGORY_ERROR,
 } from "../action-types/blog-form-types";
@@ -33,4 +35,9 @@ export const setCategoryFetchError = (err: any) => {
 
 export const setCategoryData = (data: any) => {
   return { type: SET_CATEGORY_DATA, payload: data };
+};
+
+//!these are for first blog submission
+export const set_blog_fetch_status = (bool: boolean) => {
+  return { type: SET_BLOG_FETCH_STATUS, payload: bool };
 };

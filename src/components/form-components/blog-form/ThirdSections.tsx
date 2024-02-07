@@ -12,8 +12,8 @@ export default function ThirdSection() {
         InputLabelProps={{ style: { color: "white" } }}
         id="outlined-multiline-static"
         className="text-field-class"
-        name="intro"
-        value={formData.intro}
+        name="blog_intro"
+        value={formData.blog_intro}
         onChange={(e)=> changeHandler(e.target.name,e.target.value)}
         sx={{
           // width: "50%",
@@ -28,8 +28,8 @@ export default function ThirdSection() {
         inputProps={{ style: { color: "white" } }}
         InputLabelProps={{ style: { color: "white" } }}
         id="outlined-multiline-static"
-        name="body"
-        value={formData.body}
+        name="blog_body"
+        value={formData.blog_body}
         onChange={(e)=> changeHandler(e.target.name,e.target.value)}
         sx={{
           marginTop: "2rem",
@@ -45,8 +45,8 @@ export default function ThirdSection() {
         inputProps={{ style: { color: "white" } }}
         InputLabelProps={{ style: { color: "white" } }}
         id="outlined-multiline-static"
-        name="outro"
-        value={formData.outro}
+        name="blog_outro"
+        value={formData.blog_outro}
         onChange={(e)=> changeHandler(e.target.name,e.target.value)}
         sx={{
           marginTop: "2rem",
@@ -62,8 +62,8 @@ export default function ThirdSection() {
         InputLabelProps={{ style: { color: "white" } }}
         className="text-field-class"
         id="outlined-multiline-static"
-        name="summary"
-        value={formData.summary}
+        name="blog_summary"
+        value={formData.blog_summary}
         onChange={(e)=> changeHandler(e.target.name,e.target.value)}
         sx={{
           marginTop: "2rem",
