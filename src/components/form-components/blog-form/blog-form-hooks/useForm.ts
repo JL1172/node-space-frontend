@@ -59,6 +59,9 @@ export const useForm = (
         sub_categories: subCategoriesFinal || [],
       };
       //grabbing files and appending them to formdata
+      //TODO NEED TO ADD THE FUNCITONALITY WHERE ARE FILES ARE PICKED UP FROM THE BACKEND CORRECTLY, 
+      //TODO IT HAS SOMETHING TO DO WITH FORMDATA MIGHT NEED TO EXPLICITYL STATE ALL KEYS THROUGH THAT MEANS
+      //TODO NEED TO FINISH HANDLING THIS SUBMISSION
       const form_data = new FormData();
       for (const file of formData.files) {
         form_data.append("files", file);
