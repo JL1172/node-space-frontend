@@ -90,22 +90,35 @@ export const useForm = (
       console.log(res);
     } catch (err: any) {
       if (err.response.data.message === "Forbidden.") {
-        setJwtError(err.response.data.message);
-        console.log(err.response.data.message);
-        setAuthenticationState(false);
         await advancedLogout();
-        console.log("this is for forbidden");
+        alert(`Error: ${err.response.data.message}`);
       } else if (err.response.data.message === "Too Many Requests") {
-        console.log("hello too many rate limiter", err.response.data.message);
         setCategoryFetchError(err.response.data.message);
       } else if (err.response.data.message === "API Key Required") {
-        console.log("this is for api key verification");
-        setJwtError(err.response.data.message);
-        setAuthenticationState(false);
         await advancedLogout();
+        alert(`Error: ${err.response.data.message}`);
       } else {
-        console.log(err);
-        setFormData({ ...formData, errors: err.response.data.message });
+        if (Array.isArray(err.response.data.message.error)) {
+          window.localStorage.clear();
+          nav("/");
+          alert(err.response.data.message.error[1]);
+        } else if (
+          /invalid file type/i.test(err.response.data.message) ||
+          (err.response.data.message.message &&
+            err.response.data.message.message === "File is required")
+        ) {
+          const error = /invalid file type/i.test(err.response.data.message)
+            ? err.response.data.message
+            : err.response.data.message.message === "File is required"
+            ? err.response.data.message.message
+            : "";
+          setFormData({
+            ...formData,
+            errors: [{ files: error }],
+          });
+        } else {
+          setFormData({ ...formData, errors: err.response.data.message });
+        }
       }
       //parse error types
       //nav function if forbidden force rerender of page tbh

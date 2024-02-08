@@ -7,7 +7,8 @@ import { Alert } from "@mui/material";
 import { IoMdClose } from "react-icons/io";
 
 export default function FourthSection() {
-  const { formData, changeHandler, deleteFileFromSelection } = useContext(FormStateContext);
+  const { formData, changeHandler, deleteFileFromSelection } =
+    useContext(FormStateContext);
   return (
     <div className="media-div">
       <div className="h4-div upload-heading">
@@ -51,28 +52,43 @@ export default function FourthSection() {
                       key={i}
                       style={{ display: "flex", flexDirection: "column" }}
                     >
-                      {n.blog_author_name && (
+                      {n.files && (
                         <div
                           style={{ display: "flex", flexDirection: "column" }}
                         >
                           <div style={{ fontWeight: "bold" }}>
                             File Error(s)
                           </div>
-                          {Object.values(n.blog_author_name).map(
-                            (a: any, idx: number) => {
-                              return (
-                                <li key={idx}>
-                                  {a}
-                                  <br />
-                                </li>
-                              );
-                            }
-                          )}
+                          <li>{n.files}</li>
                         </div>
                       )}
                     </span>
                   );
                 })}
+              <div>
+                <div style={{ fontWeight: "bold", marginTop: '1rem' }}>Files Selected:</div>
+                {formData.files.length > 0 && (
+                  <div id="file-wrapper-presentation">
+                    {formData.files.map((n: any, i: number) => {
+                      return (
+                        <div className="file-selected" key={i}>
+                          {n.name}
+                          <IoMdClose
+                            className="io-md-close"
+                            onClick={() => deleteFileFromSelection(n.name)}
+                            style={{
+                              cursor: "pointer",
+                              marginLeft: "5px",
+                              width: "1.2rem",
+                              height: "1.2rem",
+                            }}
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
             </Alert>
           ) : (
             <Alert
@@ -94,10 +110,10 @@ export default function FourthSection() {
                     {formData.files.map((n: any, i: number) => {
                       return (
                         <div className="file-selected" key={i}>
-                          {n.name}{" "}
+                          {n.name}
                           <IoMdClose
-                          className="io-md-close"
-                          onClick={()=>deleteFileFromSelection(n.name)}
+                            className="io-md-close"
+                            onClick={() => deleteFileFromSelection(n.name)}
                             style={{
                               cursor: "pointer",
                               marginLeft: "5px",
