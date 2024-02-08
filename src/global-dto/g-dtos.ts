@@ -20,6 +20,9 @@ export interface BlogFormProps {
   blogState: BlogFormState;
   initCategoryFetch: Function;
   set_blog_fetch_status: Function;
+  setAuthenticationState: Function;
+  setJwtError: Function;
+  setCategoryFetchError: Function;
 }
 export enum ROLE {
   USER = "USER",
@@ -100,6 +103,7 @@ export interface BlogFormType {
   blog_outro: string;
   blog_summary: string;
   files: string[];
+  errors: any[]
 }
 
 export interface BlogFormState {
@@ -109,12 +113,13 @@ export interface BlogFormState {
 }
 
 export interface FinalBlogPayloadType {
+  [key: string]: any;
   blog_title: string;
   blog_intro: string;
   blog_body: string;
   blog_outro: string;
   blog_summary: string;
   blog_author_name: string;
-  category_id: number;
+  category_id: string;
   sub_categories: number[];
 }

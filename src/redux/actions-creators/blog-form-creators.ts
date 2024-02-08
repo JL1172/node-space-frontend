@@ -1,5 +1,4 @@
-import { addBlogPtOne, getCategories } from "../../api/blog-endpoint";
-import { FinalBlogPayloadType } from "../../global-dto/g-dtos";
+import { getCategories } from "../../api/blog-endpoint";
 import {
   SET_BLOG_FETCH_STATUS,
   SET_CATEGORY_DATA,

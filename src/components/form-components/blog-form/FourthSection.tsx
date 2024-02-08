@@ -20,8 +20,9 @@ export default function FourthSection() {
         >
           Attachments/Media
           <VisuallyHiddenInput
-            onChange={(e) => {
-              changeHandler("files", e.target.files);
+            onChange={(e:any) => {
+              // const filesArr = Array.from(e.target.files);
+              changeHandler("files", e.target.files[0]);
             }}
             type="file"
             multiple

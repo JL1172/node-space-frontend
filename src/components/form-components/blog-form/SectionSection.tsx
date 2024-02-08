@@ -69,7 +69,7 @@ export default function SecondSection() {
       <Autocomplete
         limitTags={5}
         // disableClearable
-        isOptionEqualToValue={(option, value)=> option.id === value.id}
+        isOptionEqualToValue={(option, value) => option.id === value.id}
         value={formData.sub_categories}
         sx={{
           backgroundColor: "rgb(51, 51, 51)",
@@ -143,19 +143,80 @@ export default function SecondSection() {
         }}
       />
       <div id="last-first-div">
-        <Alert
-          variant="outlined"
-          style={{
-            marginTop: "1rem",
-            width: "100%",
-            color: "white",
-            marginBottom: "3rem",
-          }}
-          id="alert"
-          severity="info"
-        >
-          Note: These Tags Will Help The Exposure Of Your Blog
-        </Alert>
+        {formData.errors.filter((n: any) => n.sub_categories || n.category_id)
+          .length > 0 ? (
+          <Alert
+            variant="outlined"
+            style={{
+              width: "100%",
+              marginTop: "1rem",
+              color: "white",
+              marginBottom: "3rem",
+            }}
+            id="alert"
+            severity="error"
+          >
+            {formData.errors
+              .filter((n: any) => n.sub_categories || n.category_id)
+              .map((n: any, i: number) => {
+                return (
+                  <span
+                    key={i}
+                    style={{ display: "flex", flexDirection: "column" }}
+                  >
+                    {n.sub_categories && (
+                      <div style={{ display: "flex", flexDirection: "column" }}>
+                        <div style={{ fontWeight: "bold" }}>
+                          Sub-Category Error(s)
+                        </div>
+                        {Object.values(n.sub_categories).map(
+                          (a: any, idx: number) => {
+                            return (
+                              <li key={idx}>
+                                {a}
+                                <br />
+                              </li>
+                            );
+                          }
+                        )}
+                      </div>
+                    )}
+                    {n.category_id && (
+                      <div style={{ display: "flex", flexDirection: "column" }}>
+                        <div style={{ fontWeight: "bold" }}>
+                          Category Error(s)
+                        </div>
+                        {Object.values(n.category_id).map(
+                          (a: any, idx: number) => {
+                            return (
+                              <li key={idx}>
+                                {a}
+                                <br />
+                              </li>
+                            );
+                          }
+                        )}
+                      </div>
+                    )}
+                  </span>
+                );
+              })}
+          </Alert>
+        ) : (
+          <Alert
+            variant="outlined"
+            style={{
+              marginTop: "1rem",
+              width: "100%",
+              color: "white",
+              marginBottom: "3rem",
+            }}
+            id="alert"
+            severity="info"
+          >
+            Note: These Tags Will Help The Exposure Of Your Blog
+          </Alert>
+        )}
       </div>
     </div>
   );

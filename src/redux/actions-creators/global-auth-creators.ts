@@ -23,7 +23,7 @@ export const fetchAuthenticationData = () => async (dispatch: any) => {
     } else {
       dispatch(setJwtError(err.response.data.message.error[1]));
     }
-    dispatch(setAuthenticationState(err.response.data.message.authorized));
+    dispatch(setAuthenticationState(false));
   } finally {
     dispatch(setLoadingState(false));
     setTimeout(() => {
@@ -48,7 +48,7 @@ export const initiateLogout = () => async (dispatch: any) => {
 const setCreatorState = (data: { username: string; email: string }) => {
   return { type: SET_CREATOR_STATE, payload: data };
 };
-const setJwtError = (data: string) => {
+export const setJwtError = (data: string) => {
   //eslint-disable-line
   return { type: SET_JWT_ERROR, payload: data };
 };
@@ -60,6 +60,6 @@ export const setLoadingState = (bool: boolean) => {
   return { type: SET_LOADING_STATE, payload: bool };
 };
 
-const setAuthenticationState = (bool: boolean) => {
+export const setAuthenticationState = (bool: boolean) => {
   return { type: SET_AUTH_STATE, payload: bool };
 };

@@ -5,6 +5,7 @@ import {
   FinalBlogPayloadType,
 } from "../../../../global-dto/g-dtos";
 import { addBlogPtOne } from "../../../../api/blog-endpoint";
+import { NavigateFunction } from "react-router-dom";
 
 export const initialState: BlogFormType = {
   blog_title: "",
@@ -17,12 +18,18 @@ export const initialState: BlogFormType = {
   blog_outro: "",
   blog_summary: "",
   files: [],
+  errors: [],
 };
 export const useForm = (
   key: string,
   state: BlogFormType,
   blogState: BlogFormState,
-  set_blog_fetch_status: Function
+  set_blog_fetch_status: Function,
+  setAuthenticationState: Function,
+  setJwtError: Function,
+  nav: NavigateFunction,
+  advancedLogout: Function,
+  setCategoryFetchError: Function
 ) => {
   const [formData, setFormData] = useState(state);
   const changeHandler = (name: string | symbol, value: any) => {
@@ -42,11 +49,12 @@ export const useForm = (
     try {
       //prevent default
       e.preventDefault();
+      //clearing error cache
+      setFormData({ ...formData, errors: [] });
       //setting loading page into effect
       set_blog_fetch_status(true);
       //grabbing only sub-category id's
       const subCategoriesFinal = formData.sub_categories.map((n) => n.id);
-      console.log(formData.sub_categories)
       //creating payload acceptable to backend
       const payload: FinalBlogPayloadType = {
         blog_title: formData.blog_title,
@@ -55,24 +63,52 @@ export const useForm = (
         blog_outro: formData.blog_outro,
         blog_summary: formData.blog_summary,
         blog_author_name: formData.blog_author_name,
-        category_id: Number(formData.blog_category),
-        sub_categories: subCategoriesFinal || [],
+        category_id: formData.blog_category,
+        sub_categories: subCategoriesFinal,
       };
       //grabbing files and appending them to formdata
-      //TODO NEED TO ADD THE FUNCITONALITY WHERE ARE FILES ARE PICKED UP FROM THE BACKEND CORRECTLY, 
-      //TODO IT HAS SOMETHING TO DO WITH FORMDATA MIGHT NEED TO EXPLICITYL STATE ALL KEYS THROUGH THAT MEANS
-      //TODO NEED TO FINISH HANDLING THIS SUBMISSION
+      //all necessary formdata manipulation
       const form_data = new FormData();
       for (const file of formData.files) {
         form_data.append("files", file);
       }
-      //calling api to add blog
-      const res = await addBlogPtOne(payload);
+      for (const pay of Object.keys(payload)) {
+        if (pay !== "sub_categories") {
+          form_data.append(pay, payload[pay]);
+        }
+      }
+      payload.sub_categories.forEach((n: number) => {
+        form_data.append("sub_categories", n + "");
+      });
+      const res = await addBlogPtOne(form_data);
       console.log(res);
-    } catch (err) {
-      console.log(err);
+    } catch (err: any) {
+      if (err.response.data.message === "Forbidden.") {
+        setJwtError(err.response.data.message);
+        console.log(err.response.data.message);
+        setAuthenticationState(false);
+        await advancedLogout();
+        console.log("this is for forbidden");
+      } else if (err.response.data.message === "Too Many Requests") {
+        console.log("hello too many rate limiter", err.response.data.message);
+        setCategoryFetchError(err.response.data.message);
+      } else if (err.response.data.message === "API Key Required") {
+        console.log("this is for api key verification");
+        setJwtError(err.response.data.message);
+        setAuthenticationState(false);
+        await advancedLogout();
+      } else {
+        console.log(err);
+        setFormData({ ...formData, errors: err.response.data.message });
+      }
+      //parse error types
+      //nav function if forbidden force rerender of page tbh
+      //use advancedlogout??
     } finally {
       set_blog_fetch_status(false);
+      setTimeout(async () => {
+        setCategoryFetchError("");
+      }, 5000);
     }
   };
   return [formData, changeHandler, handleSubmission];

@@ -10,12 +10,20 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoReturnUpBackSharp } from "react-icons/io5";
 import { connect } from "react-redux";
-import { initiateLogout } from "../../redux/actions-creators/global-auth-creators";
+import {
+  initiateLogout,
+  setAuthenticationState,
+  setJwtError,
+} from "../../redux/actions-creators/global-auth-creators";
 import { RootState } from "../../redux/reducers/root-reducers";
 import { BlogFormProps } from "../../global-dto/g-dtos";
 import { FormStateContext } from "./blog-form/blog-form-contexts/FormStateContext";
 import { initialState, useForm } from "./blog-form/blog-form-hooks/useForm";
-import { initCategoryFetch, set_blog_fetch_status } from "../../redux/actions-creators/blog-form-creators";
+import {
+  initCategoryFetch,
+  setCategoryFetchError,
+  set_blog_fetch_status,
+} from "../../redux/actions-creators/blog-form-creators";
 import { Alert } from "@mui/material";
 import SpinnerLoader from "../protected-components/Spinner";
 
@@ -33,19 +41,28 @@ function BlogForm(props: BlogFormProps) {
     "blog_form_data",
     initialState,
     props.blogState,
-    props.set_blog_fetch_status
+    props.set_blog_fetch_status,
+    props.setJwtError,
+    props.setAuthenticationState,
+    nav,
+    advancedLogout,
+    props.setCategoryFetchError,
   );
-
   return (
     <StyledBlogForm>
-      {props.authState.jwt_error && (
-        <Alert severity="error">{props.blogState.category_fetch_err}.</Alert>
+      {props.blogState.category_fetch_err && (
+        <Alert sx={{position: "fixed", top: 0, width: '100%'}} severity="error">{props.blogState.category_fetch_err}.</Alert>
       )}
       {props.blogState.blog_fetch_status ? (
         <SpinnerLoader />
       ) : (
         <FormStateContext.Provider
-          value={{ formData, changeHandler, blogState: props.blogState, handleSubmission }}
+          value={{
+            formData,
+            changeHandler,
+            blogState: props.blogState,
+            handleSubmission,
+          }}
         >
           <form>
             <div id="h1-div" className="spec-h1-div">
@@ -76,5 +93,9 @@ const mapStateToProps = (state: RootState) => {
 };
 export default connect(mapStateToProps, {
   initiateLogout,
-  initCategoryFetch, set_blog_fetch_status
+  initCategoryFetch,
+  set_blog_fetch_status,
+  setAuthenticationState,
+  setJwtError,
+  setCategoryFetchError
 })(BlogForm);

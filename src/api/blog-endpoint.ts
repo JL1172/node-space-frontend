@@ -1,6 +1,5 @@
 import axios, { AxiosInstance } from "axios";
 import { API_KEY, AUTH_BASE_URL } from "../utilities/api-utils";
-import { FinalBlogPayloadType } from "../global-dto/g-dtos";
 
 const axiosInstance: AxiosInstance = axios.create({
   headers: { "api-key": API_KEY, Authorization: "" },
@@ -12,12 +11,17 @@ export const getCategories = () => {
   return axiosInstance.get(`${AUTH_BASE_URL}/api/categories`);
 };
 
-export const addBlogPtOne = (blog_payload: FinalBlogPayloadType) => {
+export const addBlogPtOne = (data: FormData) => {
   const token = window.localStorage.getItem("token");
-  axiosInstance.defaults.headers["Authorization"] = token || "";
-  return axiosInstance.post(`${AUTH_BASE_URL}/api/create-blog`, blog_payload, {
+  let config = {
+    method: "post",
+    maxBodyLength: Infinity,
+    url: `${AUTH_BASE_URL}/api/create-blog`,
     headers: {
-      "Content-Type": "multipart/form-data",
+      "api-key": API_KEY,
+      Authorization: token || "",
     },
-  });
+    data: data,
+  };
+  return axios.request(config);
 };
