@@ -44,6 +44,12 @@ export const useForm = (
       setFormData({ ...formData, [name]: value });
     }
   };
+  const deleteFileFromSelection = (fileName: string) => {
+    const index = formData.files.findIndex((n: any) => n.name === fileName);
+    const cp = [...formData.files];
+    cp.splice(index, 1);
+    setFormData({ ...formData, files: cp });
+  };
   //!submission
   const handleSubmission = async (e: Event) => {
     try {
@@ -111,5 +117,5 @@ export const useForm = (
       }, 5000);
     }
   };
-  return [formData, changeHandler, handleSubmission];
+  return [formData, changeHandler, handleSubmission, deleteFileFromSelection];
 };

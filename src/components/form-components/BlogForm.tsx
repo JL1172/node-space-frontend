@@ -37,21 +37,27 @@ function BlogForm(props: BlogFormProps) {
     props.initiateLogout();
     nav("/");
   };
-  const [formData, changeHandler, handleSubmission] = useForm(
-    "blog_form_data",
-    initialState,
-    props.blogState,
-    props.set_blog_fetch_status,
-    props.setJwtError,
-    props.setAuthenticationState,
-    nav,
-    advancedLogout,
-    props.setCategoryFetchError,
-  );
+  const [formData, changeHandler, handleSubmission, deleteFileFromSelection] =
+    useForm(
+      "blog_form_data",
+      initialState,
+      props.blogState,
+      props.set_blog_fetch_status,
+      props.setJwtError,
+      props.setAuthenticationState,
+      nav,
+      advancedLogout,
+      props.setCategoryFetchError
+    );
   return (
     <StyledBlogForm>
       {props.blogState.category_fetch_err && (
-        <Alert sx={{position: "fixed", top: 0, width: '100%'}} severity="error">{props.blogState.category_fetch_err}.</Alert>
+        <Alert
+          sx={{ position: "fixed", top: 0, zIndex: 5, width: "100%" }}
+          severity="error"
+        >
+          {props.blogState.category_fetch_err}.
+        </Alert>
       )}
       {props.blogState.blog_fetch_status ? (
         <SpinnerLoader />
@@ -62,6 +68,7 @@ function BlogForm(props: BlogFormProps) {
             changeHandler,
             blogState: props.blogState,
             handleSubmission,
+            deleteFileFromSelection,
           }}
         >
           <form>
@@ -97,5 +104,5 @@ export default connect(mapStateToProps, {
   set_blog_fetch_status,
   setAuthenticationState,
   setJwtError,
-  setCategoryFetchError
+  setCategoryFetchError,
 })(BlogForm);

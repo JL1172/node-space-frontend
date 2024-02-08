@@ -101,26 +101,36 @@ export const StyledBlogForm = styled.div`
     justify-content: space-evenly;
     align-items: center;
     min-height: 25dvh;
-    text-align: center;
+    /* text-align: center; */
     height: fit-content;
     .h4-div {
       width: 50%;
       font-size: 22px;
       margin-top: 2rem;
     }
+    .upload-heading {
+      margin-bottom: 1rem;
+    }
     #upload-div {
       width: 50%;
       display: flex;
       justify-content: center;
-      align-items: center;
+      flex-direction: column;
       min-height: 23dvh;
       height: fit-content;
       border-bottom: 1px solid rgb(51, 51, 51);
+      #upload-button-1 {
+        width: 98%;
+        padding: 0;
+        margin: 0;
+        height: 3rem;
+        margin-bottom: 1rem;
+      }
     }
   }
   #blog-upload {
     margin-top: 3rem;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
   }
   .text-field-class {
     width: 50%;
@@ -129,7 +139,28 @@ export const StyledBlogForm = styled.div`
   .buttons-class {
     width: 30%;
   }
-  
+  .file-selected {
+    background-color: rgb(51, 51, 51);
+    border-radius: 5px;
+    min-height: 1.5rem;
+    height: fit-content;
+    margin: 5px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: .2rem;
+  }
+  .io-md-close {
+    &:active {
+      transform: scale(102%);
+      transition: 100ms;
+    }
+  }
+  #file-wrapper-presentation {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
   @media screen and (max-width: 1000px) {
     #paragraph-alert {
       width: 99%;
@@ -196,9 +227,8 @@ export const StyledBlogForm = styled.div`
       position: fixed;
       left: 0;
       width: 100% !important;
-      border: 1px solid rgb(51,51,51);
-      top: 5px;
-      background-color: rgb(21,21,21);
+      outline: 1px solid rgb(51, 51, 51);
+      background-color: rgb(21, 21, 21);
       display: flex;
       align-items: center;
       justify-content: space-evenly;
@@ -206,7 +236,7 @@ export const StyledBlogForm = styled.div`
       z-index: 5;
       transition: 100ms ease-in-out;
       cursor: pointer;
-      border-radius: 10rem;
+      border-radius: 0;
     }
 
     form {
@@ -242,10 +272,16 @@ export const StyledBlogForm = styled.div`
     .buttons-class {
       width: 75%;
     }
+    #blog-upload {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
     .media-div {
       width: 99%;
       display: flex;
       align-items: center;
+      min-height: 50dvh;
+      height: fit-content;
       .h4-div {
         width: 98%;
         text-align: center;
