@@ -1,4 +1,4 @@
-import { getCategories } from "../../api/blog-endpoint";
+import { getCategories } from "../../api/blog-form-endpoint/blog-endpoint";
 import {
   SET_BLOG_FETCH_STATUS,
   SET_CATEGORY_DATA,

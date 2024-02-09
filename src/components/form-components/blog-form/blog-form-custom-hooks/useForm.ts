@@ -4,7 +4,7 @@ import {
   BlogFormType,
   FinalBlogPayloadType,
 } from "../../../../global-dto/g-dtos";
-import { addBlogPtOne } from "../../../../api/blog-endpoint";
+import { addBlogPtOne } from "../../../../api/blog-form-endpoint/blog-endpoint";
 import { NavigateFunction } from "react-router-dom";
 
 export const initialState: BlogFormType = {

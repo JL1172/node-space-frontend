@@ -12,7 +12,7 @@ import { AuthContext } from "./components/auth-components/auth-form/auth-form-co
 import {
   initialState,
   useForm,
-} from "./components/auth-components/auth-form/auth-form-hooks/useForm";
+} from "./components/auth-components/auth-form/auth-form-custom-hooks/useForm";
 import ProtectedRoute from "./components/protected-components/ProtectedRoute";
 import {
   initiateLogout,
@@ -47,7 +47,6 @@ function App(props: AppProps) {
     //   localStorage.clear();
     // };
     // window.addEventListener("beforeunload", handleBeforeUnload);
-
     // return () => {
     //   window.removeEventListener("beforeunload", handleBeforeUnload);
     // };

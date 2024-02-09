@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { ROLE, AuthStateType } from "../../../../global-dto/g-dtos";
-import { loginEndpoint, registerEndpoint } from "../../../../api/auth-endpoint";
+import {
+  loginEndpoint,
+  registerEndpoint,
+} from "../../../../api/auth-endpoint/auth-endpoint";
 import { AxiosResponse } from "axios";
 import { NavigateFunction } from "react-router-dom";
 
@@ -242,7 +245,7 @@ export const useForm = (
     } finally {
       setTimeout(() => {
         setSuccessMessage("");
-      }, 5000);
+      }, 1500);
     }
   };
   const login = async (): Promise<void> => {
@@ -256,10 +259,16 @@ export const useForm = (
       window.localStorage.clear();
       window.localStorage.setItem("token", input);
       setFormData(initialState);
-      setLoadingState(false);
       nav("/creator/blog-form");
+      setTimeout(() => {
+        nav("/creator/blog-form");
+      }, 1000);
+      setLoadingState(false);
     } catch (err: any | unknown) {
-      if (err.response.data.message === "API Key Required" || err.response.data.message === 'Forbidden.') {
+      if (
+        err.response.data.message === "API Key Required" ||
+        err.response.data.message === "Forbidden."
+      ) {
         alert(err.response.data.message);
       }
       const usernameEmpty: Record<string, string> =

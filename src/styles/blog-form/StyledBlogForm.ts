@@ -120,7 +120,7 @@ export const StyledBlogForm = styled.div`
       height: fit-content;
       border-bottom: 1px solid rgb(51, 51, 51);
       #upload-button-1 {
-        width: 98%;
+        width: 100%;
         padding: 0;
         margin: 0;
         height: 3rem;
@@ -268,6 +268,9 @@ export const StyledBlogForm = styled.div`
       width: 99% !important;
       display: flex;
       align-items: center;
+    }
+    #upload-button-1 {
+      width: 98% !important;
     }
     .buttons-class {
       width: 75%;

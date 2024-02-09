@@ -5,7 +5,7 @@ import {
   SET_CREATOR_STATE,
   SET_SUCCESS_MESSAGE,
 } from "../action-types/global-auth-types";
-import { authorizeEndpoint, logoutEndpoint } from "../../api/auth-endpoint";
+import { authorizeEndpoint, logoutEndpoint } from "../../api/auth-endpoint/auth-endpoint";
 
 export const fetchAuthenticationData = () => async (dispatch: any) => {
   dispatch(setLoadingState(true));
@@ -28,7 +28,7 @@ export const fetchAuthenticationData = () => async (dispatch: any) => {
     dispatch(setLoadingState(false));
     setTimeout(() => {
       dispatch(setJwtError(""));
-    }, 5000);
+    }, 1500);
   }
 };
 

@@ -1,5 +1,5 @@
 import BlogForm from "../form-components/BlogForm";
-import { Suspense, useEffect } from "react";
+import { useEffect } from "react";
 import { connect } from "react-redux";
 import { RootState } from "../../redux/reducers/root-reducers";
 import { JwtProps } from "../../global-dto/g-dtos";
@@ -14,11 +14,11 @@ function ProtectedRouter(props: JwtProps) {
     props.fetchAuthenticationData();
   }, []); //eslint-disable-line
   return (
-    <Suspense fallback ={<SpinnerLoader />}>
+    <div>
       {props.authState.loading_state && <SpinnerLoader />}
       {props.authState.authentication_state && <BlogForm />}
       {props.authState.authentication_state === false && <RedirectRoute />}
-    </Suspense>
+    </div>
   );
 }
 

@@ -1,11 +1,11 @@
 import { ThemeProvider } from "@mui/material/styles";
 import { StyledBlogForm } from "../../styles/blog-form/StyledBlogForm";
 import { theme } from "./blog-form/blog-form-themes/input-theme";
-import FirstSection from "./blog-form/FirstSection";
-import SecondSection from "./blog-form/SectionSection";
-import ThirdSection from "./blog-form/ThirdSections";
-import FourthSection from "./blog-form/FourthSection";
-import FifthSection from "./blog-form/FifthSection";
+import FirstSection from "./blog-form/01-FirstSection";
+import SecondSection from "./blog-form/02-SecondSection";
+import ThirdSection from "./blog-form/03-ThirdSections";
+import FourthSection from "./blog-form/04-FourthSection";
+import FifthSection from "./blog-form/05-FifthSection";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoReturnUpBackSharp } from "react-icons/io5";
@@ -18,7 +18,7 @@ import {
 import { RootState } from "../../redux/reducers/root-reducers";
 import { BlogFormProps } from "../../global-dto/g-dtos";
 import { FormStateContext } from "./blog-form/blog-form-contexts/FormStateContext";
-import { initialState, useForm } from "./blog-form/blog-form-hooks/useForm";
+import { initialState, useForm } from "./blog-form/blog-form-custom-hooks/useForm";
 import {
   initCategoryFetch,
   setCategoryFetchError,
