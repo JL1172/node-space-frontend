@@ -1,47 +1,38 @@
-# Getting Started with Create React App
+# Node-Space-Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Node-Space-Frontend is a project created using Create React App (CRA) and written in TypeScript.
 
-## Available Scripts
+State management is primarily done with Redux, mainly for global error handling, while the rest is handled with Context API.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+This platform will do the following:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Allow developers to create creator accounts
+- Write their own blogs
+- Have their own following
+- Not necessarily worry about the overhead of marketing their content.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+It's not just a platform for blogging and community engagement, though. I am also implementing a feature where creators can release courses on any dev-related topic they'd like. For example, I'm focusing on vanilla Node.js to demonstrate real-world practical applications of its built-in modules such as child process, fs, os, buffer, http, etc.
 
-### `npm test`
+## Styling
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Styling is done using:
+- styled-components
+- CSS
+- Material-UI for the component library
+- React Icons for the icons
+- Google Fonts for the fonts
 
-### `npm run build`
+This is a responsive website.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Additional Features
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Many custom hooks
+- API calls using an API created for this project
+- Implementation of restricted routes
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Future Steps
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-![Alt text](<>)
+There are plans to:
+- Possibly start over with Next.js and Tailwind CSS for better performance and alignment with industry standards.
